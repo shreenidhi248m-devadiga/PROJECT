@@ -1,0 +1,21 @@
+{
+  "name": "college-management-system",
+  "version": "1.0.0",
+  "description": "College Management System — Admin Workstation",
+  "main": "app.js",
+  "scripts": {
+    "dev": "serve . -l 3000",
+    "start": "serve . -l 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shreenidhi248m-devadiga/PROJECT.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "serve": "^14.2.6"
+  }
+}

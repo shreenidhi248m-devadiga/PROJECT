@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     'achievements': 'ACHIEVEMENTS & PERFORMANCE',
     'statistics': 'CAMPUS STATISTICAL OVERVIEW & GROWTH',
     'complaint': 'STUDENT COMPLAINTS LOG & REDRESSAL',
-    'login': 'AUTHENTICATION PORTAL'
+    'login': 'ABC COLLEGE OF SCIENCE — SECURE PORTAL LOGIN'
   };
 
   function switchView(viewId) {
@@ -968,7 +968,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Default setup
-  configureRole('admin');
+  // Default setup with URL query parameter support
+  const urlRole = new URLSearchParams(window.location.search).get('role');
+  configureRole(urlRole && roleCredentials[urlRole] ? urlRole : 'admin');
 
 });

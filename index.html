@@ -4,1454 +4,980 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>College Management System — Admin Workstation</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>ABC College of Science — Smart Attendance & Student Management System</title>
+  <meta name="description"
+    content="An intelligent college management platform that simplifies attendance tracking, student information, faculty management, and academic activities in one place.">
+  <meta name="keywords" content="college management system, attendance tracker, student portal, faculty portal, academic management, BCA, B.Com, BBA">
+
+  <!-- Favicon / Brand Icon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%230284c7' d='M256 0c14.1 0 27.2 7.4 34.5 19.5l216 360c7.3 12.1 7.4 27.3 .2 39.5s-20.1 19.8-34.7 19.8L344 438.8l-88-146.7-88 146.7L40 438.8c-14.6 0-27.5-7.6-34.7-19.8s-7.1-27.4 .2-39.5l216-360C228.8 7.4 241.9 0 256 0z'/></svg>">
+
+  <!-- Google Fonts: Inter & Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap"
     rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main Landing Stylesheet -->
+  <link rel="stylesheet" href="landing.css">
 </head>
 
 <body>
-  <div class="app-container">
 
-    <!-- Sidebar Navigation -->
-    <aside id="sidebar-nav" class="sidebar hidden-sidebar">
-      <div class="brand">
-        <div class="brand-icon">
-          <i class="fa-solid fa-graduation-cap"></i>
-        </div>
-        <div class="brand-text">
-          <span class="brand-line">COLLEGE</span>
-          <span class="brand-line">MANAGEMENT</span>
-          <span class="brand-line">SYSTEM</span>
-        </div>
+  <!-- =================================================================== -->
+  <!-- TOP ANNOUNCEMENT STRIP -->
+  <!-- =================================================================== -->
+  <div class="top-bar">
+    <div class="container top-bar-content">
+      <div class="top-bar-left">
+        <span class="top-bar-item">
+          <i class="fa-solid fa-location-dot"></i> Kundapura, Karnataka - 576201
+        </span>
+        <span class="top-bar-item">
+          <i class="fa-solid fa-phone"></i> +91 98450 12345 (Principal's Desk)
+        </span>
       </div>
-
-      <nav class="nav-menu" id="admin-nav-menu">
-        <button class="nav-item active" data-view="college-profile" id="nav-item-dashboard">
-          <i class="fa-solid fa-house"></i>
-          <span>Dashboard</span>
-        </button>
-
-        <button class="nav-item" data-view="college-info" id="nav-item-college-info">
-          <i class="fa-solid fa-building-columns"></i>
-          <span>College Info</span>
-        </button>
-
-        <button class="nav-item" data-view="students" id="nav-item-students">
-          <i class="fa-solid fa-user-group"></i>
-          <span>Students</span>
-        </button>
-
-        <button class="nav-item" data-view="achievements" id="nav-item-achievements">
-          <i class="fa-solid fa-award"></i>
-          <span>Achievements</span>
-        </button>
-
-        <button class="nav-item" data-view="statistics" id="nav-item-statistics">
-          <i class="fa-solid fa-chart-line"></i>
-          <span>Statistics</span>
-        </button>
-
-        <button class="nav-item" data-view="complaint" id="nav-item-complaint">
-          <i class="fa-solid fa-comments"></i>
-          <span>Complaints</span>
-        </button>
-
-        <button id="btn-logout" class="nav-item logout">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span>Log Out</span>
-        </button>
-      </nav>
-    </aside>
-
-    <!-- Main Workspace Area -->
-    <main class="main-content">
-
-      <!-- Window Header Bar -->
-      <header class="window-bar">
-        <div class="window-left">
-          <h2 id="window-title" class="window-title">COLLEGE PROFILE</h2>
-        </div>
-
-        <div class="window-right">
-          <div class="live-clock" id="live-clock">
-            <i class="fa-regular fa-clock"></i> <span id="clock-time">12:00:00 PM</span>
-          </div>
-          <div class="active-portal-badge" id="active-portal-badge">
-            <span class="dot-online"></span> <span id="portal-badge-text">Portal Offline</span>
-          </div>
-          <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Light/Dark Theme">
-            <i class="fa-solid fa-moon"></i>
-          </button>
-          <div class="window-controls">
-            <span class="win-btn win-min" title="Minimize"><i class="fa-solid fa-minus"></i></span>
-            <span class="win-btn win-max" title="Maximize"><i class="fa-regular fa-square"></i></span>
-            <span class="win-btn win-close" title="Close"><i class="fa-solid fa-xmark"></i></span>
-          </div>
-        </div>
-      </header>
-
-      <!-- Toast Container -->
-      <div id="toast-container" class="toast-container"></div>
-
-      <!-- Views Container Wrapper -->
-      <div class="views-wrapper">
-
-        <!-- =================================================================== -->
-        <!-- LOGIN & REGISTRATION PORTAL -->
-        <!-- =================================================================== -->
-        <section id="view-login" class="view-panel active">
-          <div class="login-page-hero">
-            <div class="login-brand-header">
-              <div class="hero-logo-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-              <h1 class="login-hero-title">COLLEGE MANAGEMENT SYSTEM</h1>
-              <p class="login-hero-sub">Sign into your portal workstation or create a new account</p>
-            </div>
-
-            <div class="unified-login-card">
-              <!-- ROLE SELECTION BUTTONS -->
-              <div class="role-selector-row">
-                <button type="button" class="role-select-btn active admin-btn" data-role="admin">
-                  <div class="role-btn-icon"><i class="fa-solid fa-user-shield"></i></div>
-                  <span class="role-btn-title">ADMINISTRATOR</span>
-                </button>
-
-                <button type="button" class="role-select-btn faculty-btn" data-role="faculty">
-                  <div class="role-btn-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                  <span class="role-btn-title">FACULTY</span>
-                </button>
-
-                <button type="button" class="role-select-btn student-btn" data-role="student">
-                  <div class="role-btn-icon"><i class="fa-solid fa-graduation-cap"></i></div>
-                  <span class="role-btn-title">STUDENT</span>
-                </button>
-              </div>
-
-              <!-- FORM 1: LOGIN FORM -->
-              <form id="login-form" onsubmit="return false;" class="login-form">
-                <div class="active-role-indicator-banner">
-                  <div class="role-avatar-circle" id="login-avatar-icon">
-                    <i class="fa-solid fa-user-shield"></i>
-                  </div>
-                  <h3 id="login-portal-title">ADMINISTRATOR LOGIN</h3>
-                </div>
-
-                <div class="login-group">
-                  <label for="login-user" id="login-user-label">Username / Admin ID</label>
-                  <div class="input-with-icon">
-                    <i class="fa-solid fa-user" id="login-user-icon"></i>
-                    <input type="text" id="login-user" value="admin" placeholder="Enter identifier" required>
-                  </div>
-                </div>
-
-                <div class="login-group">
-                  <label for="login-pass">Password</label>
-                  <div class="input-with-icon pass-container">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="login-pass" value="password123" placeholder="Enter password" required>
-                    <button type="button" class="btn-toggle-pass" id="btn-toggle-pass" title="Toggle Password Visibility">
-                      <i class="fa-solid fa-eye" id="eye-icon"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <div class="login-group hidden-field" id="login-dept-group">
-                  <label for="login-dept-select">Select Course / Department</label>
-                  <div class="input-with-icon">
-                    <i class="fa-solid fa-building-columns"></i>
-                    <select id="login-dept-select">
-                      <option value="BCA">BCA</option>
-                      <option value="B.Com">B.Com</option>
-                      <option value="BBA">BBA</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button type="submit" id="btn-login-submit" class="btn-login-submit btn-admin-style">
-                  <span id="btn-login-text">LOG IN TO ADMIN PORTAL</span>
-                  <i class="fa-solid fa-arrow-right-to-bracket"></i>
-                </button>
-
-                <div class="auth-switch-line mt-2">
-                  <span>New user?</span> <a href="#" id="link-goto-register" class="auth-inline-link">Register here</a>
-                </div>
-              </form>
-
-              <!-- FORM 2: REGISTRATION FORM -->
-              <form id="register-form" onsubmit="return false;" class="login-form hidden-form">
-                <div class="active-role-indicator-banner">
-                  <div class="role-avatar-circle" id="reg-avatar-icon">
-                    <i class="fa-solid fa-user-plus"></i>
-                  </div>
-                  <h3 id="reg-portal-title">ACCOUNT REGISTRATION</h3>
-                </div>
-
-                <div class="login-group">
-                  <label for="reg-name">Full Name</label>
-                  <div class="input-with-icon">
-                    <i class="fa-solid fa-id-card"></i>
-                    <input type="text" id="reg-name" placeholder="Enter full name" required>
-                  </div>
-                </div>
-
-                <div class="login-group">
-                  <label for="reg-user" id="reg-user-label">Username / Roll No / ID</label>
-                  <div class="input-with-icon">
-                    <i class="fa-solid fa-user" id="reg-user-icon"></i>
-                    <input type="text" id="reg-user" placeholder="Create username / identifier" required>
-                  </div>
-                </div>
-
-                <div class="login-group" id="reg-dept-group">
-                  <label for="reg-dept">Select Course / Department</label>
-                  <div class="input-with-icon">
-                    <i class="fa-solid fa-building-columns"></i>
-                    <select id="reg-dept">
-                      <option value="BCA">BCA</option>
-                      <option value="B.Com">B.Com</option>
-                      <option value="BBA">BBA</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div class="login-group">
-                  <label for="reg-pass">Create Password</label>
-                  <div class="input-with-icon pass-container">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" id="reg-pass" placeholder="Enter new password" required>
-                    <button type="button" class="btn-toggle-pass" id="btn-toggle-reg-pass" title="Toggle Password Visibility">
-                      <i class="fa-solid fa-eye" id="reg-eye-icon"></i>
-                    </button>
-                  </div>
-                </div>
-
-                <button type="submit" id="btn-register-submit" class="btn-login-submit btn-admin-style">
-                  <span>REGISTER NOW</span>
-                  <i class="fa-solid fa-check-circle"></i>
-                </button>
-
-                <div class="auth-switch-line mt-2">
-                  <span>Already have an account?</span> <a href="#" id="link-goto-login" class="auth-inline-link">Log in here</a>
-                </div>
-              </form>
-
-            </div>
-          </div>
-        </section>
-
-
-        <!-- =================================================================== -->
-        <!-- DASHBOARD PAGE -->
-        <!-- =================================================================== -->
-        <section id="view-college-profile" class="view-panel">
-          <div class="page-container">
-
-            <div class="dashboard-hero-card card-box">
-              <div class="banner-image-container hero-banner">
-                <img id="college-banner-img" src="assets/college_banner.jpg" alt="College Campus" class="campus-banner-img">
-              </div>
-
-              <div class="college-profile-header">
-                <h1 id="display-college-name" class="college-name-heading">ABC COLLEGE OF SCIENCE</h1>
-                <p id="display-college-place" class="college-location-sub">
-                  <i class="fa-solid fa-location-dot"></i> <span id="disp-address">KUNDAPURA, UTTARA KANNADA, KARNATAKA - 576201</span>
-                </p>
-                <div class="principal-contact-tag">
-                  <i class="fa-solid fa-phone-volume"></i> Principal Contact: <strong id="disp-principal-no">+91 98450 12345</strong>
-                </div>
-              </div>
-            </div>
-
-            <!-- INSTITUTION INFORMATION CARD -->
-            <div class="card-box mt-4">
-              <h3 class="card-section-header"><i class="fa-solid fa-circle-info text-blue"></i> COLLEGE INFORMATION & DETAILS</h3>
-              
-              <div class="college-info-line-list">
-                <div class="info-line-item">
-                  <span class="info-line-label">College Name:</span>
-                  <span class="info-line-val" id="info-val-name">ABC COLLEGE OF SCIENCE</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">College Address:</span>
-                  <span class="info-line-val" id="info-val-address">KUNDAPURA, UTTARA KANNADA, KARNATAKA - 576201</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">Principal Phone No:</span>
-                  <span class="info-line-val" id="info-val-phone">+91 98450 12345</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">Affiliated University:</span>
-                  <span class="info-line-val">Mangalore University</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">NAAC Accreditation:</span>
-                  <span class="info-line-val text-green font-bold">Grade A+ (CGPA 3.65)</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">Institution Code:</span>
-                  <span class="info-line-val">ABC2026</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">Established Year:</span>
-                  <span class="info-line-val">1998</span>
-                </div>
-                <div class="info-line-item">
-                  <span class="info-line-label">Official Email:</span>
-                  <span class="info-line-val">principal@abccollege.edu</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-
-        <!-- =================================================================== -->
-        <!-- COLLEGE INFO PAGE -->
-        <!-- =================================================================== -->
-        <section id="view-college-info" class="view-panel">
-          <div class="page-container">
-
-            <div class="card-box main-card-box">
-              <h3 class="card-section-header">COLLEGE DETAILS</h3>
-              <div class="college-entry-grid">
-                <div class="image-upload-wrapper">
-                  <div class="image-preview-box" id="college-img-preview">
-                    <i class="fa-solid fa-image placeholder-img-icon"></i>
-                    <img id="uploaded-college-img" src="" alt="College Preview" class="uploaded-img hidden">
-                    <span class="add-img-label">ADD IMAGE</span>
-                  </div>
-                  <input type="file" id="file-college-img" accept="image/*" class="hidden-file-input">
-                  <button type="button" class="btn-choose-img" id="btn-choose-img">Choose Image</button>
-                </div>
-
-                <div class="entry-fields-column">
-                  <div class="form-group-styled">
-                    <label for="input-college-name">Enter College Name</label>
-                    <input type="text" id="input-college-name" value="ABC COLLEGE OF SCIENCE" placeholder="Type college name here...">
-                  </div>
-
-                  <div class="form-group-styled">
-                    <label for="input-college-address">Enter College Address</label>
-                    <input type="text" id="input-college-address" value="KUNDAPURA, UTTARA KANNADA, KARNATAKA - 576201" placeholder="Type college address here...">
-                  </div>
-
-                  <div class="form-group-styled">
-                    <label for="input-principal-no">Principal Phone No</label>
-                    <input type="text" id="input-principal-no" value="+91 98450 12345" placeholder="Type principal contact number...">
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- COURSE DETAILS CARD -->
-            <div class="card-box main-card-box mt-4">
-              <h3 class="card-section-header">COURSE DETAILS</h3>
-              <div class="courses-list-container" id="courses-list-container">
-                <div class="course-input-row" data-course-index="1">
-                  <span class="course-label">Course 1</span>
-                  <input type="text" class="course-name-input" value="BCA" placeholder="Course Name">
-                  <button type="button" class="btn-remove-course" title="Remove Course"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-                <div class="course-input-row" data-course-index="2">
-                  <span class="course-label">Course 2</span>
-                  <input type="text" class="course-name-input" value="B.Com" placeholder="Course Name">
-                  <button type="button" class="btn-remove-course" title="Remove Course"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-                <div class="course-input-row" data-course-index="3">
-                  <span class="course-label">Course 3</span>
-                  <input type="text" class="course-name-input" value="BBA" placeholder="Course Name">
-                  <button type="button" class="btn-remove-course" title="Remove Course"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-              </div>
-
-              <div class="add-course-btn-wrapper mt-3">
-                <button type="button" id="btn-add-more-course" class="btn-add-course-dashed">
-                  <i class="fa-solid fa-plus"></i> ADD MORE COURSE
-                </button>
-              </div>
-            </div>
-
-            <!-- ADD FACULTY FORM CARD -->
-            <div class="card-box main-card-box mt-4">
-              <div class="box-header-flex">
-                <h3 class="card-section-header mb-0"><i class="fa-solid fa-user-plus text-blue"></i> ADD NEW FACULTY MEMBER</h3>
-                <button type="button" id="btn-toggle-add-faculty" class="btn-primary-blue"><i class="fa-solid fa-plus"></i> ADD FACULTY</button>
-              </div>
-
-              <form id="form-add-faculty" onsubmit="return false;" class="faculty-add-form-grid hidden-form mt-3">
-                <div class="form-group-styled">
-                  <label for="input-fac-name">Faculty Full Name</label>
-                  <input type="text" id="input-fac-name" placeholder="e.g. Prof. Arvind Shenoy" required>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="select-fac-dept">Choose Department</label>
-                  <select id="select-fac-dept" class="form-select-styled" required>
-                    <option value="BCA" selected>BCA Department</option>
-                    <option value="B.Com">B.Com Department</option>
-                    <option value="BBA">BBA Department</option>
-                  </select>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="input-fac-desig">Designation / Role</label>
-                  <input type="text" id="input-fac-desig" placeholder="e.g. Assistant Professor" required>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="input-fac-qual">Qualification</label>
-                  <input type="text" id="input-fac-qual" placeholder="e.g. MCA, M.Tech, Ph.D." required>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="input-fac-phone">Phone Number</label>
-                  <input type="text" id="input-fac-phone" placeholder="e.g. +91 98450 44444">
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="input-fac-email">Email Address</label>
-                  <input type="email" id="input-fac-email" placeholder="e.g. arvind@abccollege.edu">
-                </div>
-
-                <div class="form-group-styled full-width-field">
-                  <label for="input-fac-spec">Specialization</label>
-                  <input type="text" id="input-fac-spec" placeholder="e.g. Cyber Security, Cloud Computing">
-                </div>
-
-                <div class="form-actions-row full-width-action mt-2">
-                  <button type="submit" id="btn-submit-faculty" class="btn-primary-blue"><i class="fa-solid fa-check"></i> ADD FACULTY TO DEPARTMENT</button>
-                  <button type="button" id="btn-cancel-faculty" class="btn-secondary-gray">CANCEL</button>
-                </div>
-              </form>
-            </div>
-
-            <!-- DEPARTMENT FACULTIES LIST -->
-            <div class="card-box main-card-box mt-4">
-              <h3 class="card-section-header"><i class="fa-solid fa-users-gear"></i> DEPARTMENT FACULTIES & HOD LIST</h3>
-
-              <!-- BCA Department Faculty Lines -->
-              <div class="dept-faculty-group mt-3">
-                <h4 class="dept-group-title text-blue"><i class="fa-solid fa-laptop-code"></i> BCA DEPARTMENT</h4>
-                <div class="faculty-line-list" id="list-faculties-bca">
-                  <div class="faculty-line-item hod-line" data-faculty-id="satish">
-                    <span class="hod-tag">HOD</span>
-                    <span class="faculty-line-name">Dr. Satish Kumar</span>
-                    <span class="faculty-line-role">Head of Department & Senior Professor</span>
-                  </div>
-
-                  <div class="faculty-line-item" data-faculty-id="rajesh">
-                    <span class="faculty-line-name">Prof. Rajesh Sharma</span>
-                    <span class="faculty-line-role">Associate Professor</span>
-                  </div>
-
-                  <div class="faculty-line-item" data-faculty-id="anitha">
-                    <span class="faculty-line-name">Prof. Anitha Rao</span>
-                    <span class="faculty-line-role">Assistant Professor</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- B.Com Department Faculty Lines -->
-              <div class="dept-faculty-group mt-4">
-                <h4 class="dept-group-title text-green"><i class="fa-solid fa-chart-line"></i> B.COM DEPARTMENT</h4>
-                <div class="faculty-line-list" id="list-faculties-bcom">
-                  <div class="faculty-line-item hod-line" data-faculty-id="radhika">
-                    <span class="hod-tag">HOD</span>
-                    <span class="faculty-line-name">Prof. Radhika Shetty</span>
-                    <span class="faculty-line-role">Head of Department & Senior Professor</span>
-                  </div>
-
-                  <div class="faculty-line-item" data-faculty-id="suresh">
-                    <span class="faculty-line-name">Prof. Suresh Bhat</span>
-                    <span class="faculty-line-role">Assistant Professor</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- BBA Department Faculty Lines -->
-              <div class="dept-faculty-group mt-4">
-                <h4 class="dept-group-title text-purple"><i class="fa-solid fa-briefcase"></i> BBA DEPARTMENT</h4>
-                <div class="faculty-line-list" id="list-faculties-bba">
-                  <div class="faculty-line-item hod-line" data-faculty-id="kvrao">
-                    <span class="hod-tag">HOD</span>
-                    <span class="faculty-line-name">Prof. K. V. Rao</span>
-                    <span class="faculty-line-role">Head of Department & Senior Professor</span>
-                  </div>
-
-                  <div class="faculty-line-item" data-faculty-id="priya">
-                    <span class="faculty-line-name">Prof. Priya Hegde</span>
-                    <span class="faculty-line-role">Assistant Professor</span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- MODAL FOR FACULTY DETAILS -->
-            <div class="modal-overlay hidden-modal" id="modal-faculty-details">
-              <div class="modal-card">
-                <button type="button" class="btn-close-modal" id="btn-close-faculty-modal"><i class="fa-solid fa-xmark"></i></button>
-                <div class="modal-header-text-only">
-                  <h3 id="modal-faculty-name">Dr. Satish Kumar</h3>
-                  <span id="modal-faculty-role" class="modal-role-badge">HOD — BCA DEPARTMENT</span>
-                </div>
-                
-                <div class="modal-body-line-by-line mt-3">
-                  <div class="detail-line"><span class="line-lbl">Name:</span> <span id="modal-faculty-fullname" class="line-val">Dr. Satish Kumar</span></div>
-                  <div class="detail-line"><span class="line-lbl">Designation:</span> <span id="modal-faculty-desig" class="line-val">Head of Department & Senior Professor</span></div>
-                  <div class="detail-line"><span class="line-lbl">Qualification:</span> <span id="modal-faculty-qual" class="line-val">Ph.D. in Computer Science</span></div>
-                  <div class="detail-line"><span class="line-lbl">Department:</span> <span id="modal-faculty-dept" class="line-val">BCA</span></div>
-                  <div class="detail-line"><span class="line-lbl">Phone No:</span> <span id="modal-faculty-phone" class="line-val">+91 98450 11111</span></div>
-                  <div class="detail-line"><span class="line-lbl">Email Address:</span> <span id="modal-faculty-email" class="line-val">satish.bca@abccollege.edu</span></div>
-                  <div class="detail-line"><span class="line-lbl">Experience:</span> <span id="modal-faculty-exp" class="line-val">18 Years</span></div>
-                  <div class="detail-line"><span class="line-lbl">Specialization:</span> <span id="modal-faculty-spec" class="line-val">Artificial Intelligence, Cloud Computing & Big Data</span></div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-actions-footer mt-4">
-              <button type="button" id="btn-save-next-college" class="btn-primary-blue"><i class="fa-solid fa-floppy-disk"></i> SAVE & NEXT</button>
-              <button type="button" id="btn-clear-college-info" class="btn-secondary-gray">CLEAR</button>
-            </div>
-
-          </div>
-        </section>
-
-
-        <!-- =================================================================== -->
-        <!-- STUDENTS PAGE -->
-        <!-- =================================================================== -->
-        <section id="view-students" class="view-panel">
-          <div class="page-container">
-
-            <!-- DEPARTMENT & CLASS YEAR SELECTOR BUTTONS -->
-            <div class="card-box student-dept-filter-card">
-              <span class="filter-header-title"><i class="fa-solid fa-filter text-blue"></i> SELECT DEPARTMENT & CLASS YEAR SEPARATION:</span>
-              
-              <div class="filter-rows-wrapper">
-                <!-- Row 1: Department Filter -->
-                <div class="dept-buttons-row">
-                  <span class="sub-filter-lbl">Department:</span>
-                  <button type="button" class="btn-dept-select active" data-dept-filter="All">
-                    <i class="fa-solid fa-users"></i> ALL DEPARTMENTS
-                  </button>
-                  <button type="button" class="btn-dept-select btn-dept-bca" data-dept-filter="BCA">
-                    <i class="fa-solid fa-laptop-code"></i> BCA
-                  </button>
-                  <button type="button" class="btn-dept-select btn-dept-bcom" data-dept-filter="B.Com">
-                    <i class="fa-solid fa-chart-line"></i> B.COM
-                  </button>
-                  <button type="button" class="btn-dept-select btn-dept-bba" data-dept-filter="BBA">
-                    <i class="fa-solid fa-briefcase"></i> BBA
-                  </button>
-                </div>
-
-                <!-- Row 2: Class Year Filter -->
-                <div class="year-buttons-row mt-2">
-                  <span class="sub-filter-lbl">Class / Year:</span>
-                  <button type="button" class="btn-year-select active" data-year-filter="All">
-                    ALL YEARS
-                  </button>
-                  <button type="button" class="btn-year-select" data-year-filter="1st Year">
-                    <i class="fa-solid fa-graduation-cap"></i> 1ST YEAR
-                  </button>
-                  <button type="button" class="btn-year-select" data-year-filter="2nd Year">
-                    <i class="fa-solid fa-graduation-cap"></i> 2ND YEAR
-                  </button>
-                  <button type="button" class="btn-year-select" data-year-filter="3rd Year">
-                    <i class="fa-solid fa-award"></i> 3RD YEAR
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Search Bar & Year Wise Search Dropdown -->
-            <div class="filter-controls-card card-box mt-3">
-              <div class="student-search-grid">
-                <input type="text" id="search-student-input" class="search-input-styled" placeholder="Search student name or roll number...">
-                <select id="filter-year-dropdown" class="styled-select">
-                  <option value="All">All Years</option>
-                  <option value="1st Year">1st Year</option>
-                  <option value="2nd Year">2nd Year</option>
-                  <option value="3rd Year">3rd Year</option>
-                </select>
-                <button type="button" id="btn-search-students" class="btn-search-solid">SEARCH</button>
-              </div>
-            </div>
-
-            <div class="student-detail-split-grid mt-4">
-
-              <div class="card-box student-list-card">
-                <h3 class="card-section-header">STUDENT ROSTER <span class="sub-count-txt" id="student-count-display">(Total: 8)</span></h3>
-                
-                <div class="table-responsive">
-                  <table class="styled-data-table table-selectable" id="table-student-list">
-                    <thead>
-                      <tr>
-                        <th>Roll No</th>
-                        <th>Name</th>
-                        <th>Course</th>
-                        <th>Class / Year</th>
-                      </tr>
-                    </thead>
-                    <tbody id="student-list-table-body">
-                      <tr class="selected-row" data-roll="1" data-course="BCA" data-year="1st Year">
-                        <td>1</td>
-                        <td><strong>Ananya P</strong></td>
-                        <td>BCA</td>
-                        <td><span class="badge badge-award">1st Year</span></td>
-                      </tr>
-                      <tr data-roll="2" data-course="B.Com" data-year="1st Year">
-                        <td>2</td>
-                        <td>Bharath S</td>
-                        <td>B.Com</td>
-                        <td><span class="badge badge-award">1st Year</span></td>
-                      </tr>
-                      <tr data-roll="3" data-course="BCA" data-year="1st Year">
-                        <td>3</td>
-                        <td>Chaithra M</td>
-                        <td>BCA</td>
-                        <td><span class="badge badge-award">1st Year</span></td>
-                      </tr>
-                      <tr data-roll="4" data-course="BBA" data-year="1st Year">
-                        <td>4</td>
-                        <td>Deepak R</td>
-                        <td>BBA</td>
-                        <td><span class="badge badge-award">1st Year</span></td>
-                      </tr>
-                      <tr data-roll="5" data-course="B.Com" data-year="1st Year">
-                        <td>5</td>
-                        <td>Harshitha P</td>
-                        <td>B.Com</td>
-                        <td><span class="badge badge-award">1st Year</span></td>
-                      </tr>
-                      <tr data-roll="6" data-course="BCA" data-year="2nd Year">
-                        <td>6</td>
-                        <td>Karthik N</td>
-                        <td>BCA</td>
-                        <td><span class="badge badge-winner">2nd Year</span></td>
-                      </tr>
-                      <tr data-roll="7" data-course="BBA" data-year="2nd Year">
-                        <td>7</td>
-                        <td>Likitha J</td>
-                        <td>BBA</td>
-                        <td><span class="badge badge-winner">2nd Year</span></td>
-                      </tr>
-                      <tr data-roll="8" data-course="B.Com" data-year="3rd Year">
-                        <td>8</td>
-                        <td>Manoj S</td>
-                        <td>B.Com</td>
-                        <td><span class="badge badge-level">3rd Year</span></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div class="pagination-bar mt-3">
-                  <button class="page-nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
-                  <button class="page-num-btn active">1</button>
-                  <button class="page-num-btn">2</button>
-                  <button class="page-num-btn">3</button>
-                  <span class="dots-sep">..</span>
-                  <button class="page-num-btn">16</button>
-                  <button class="page-nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
-                </div>
-              </div>
-
-              <div class="right-details-column">
-                <div class="card-box student-info-card">
-                  <h3 class="card-section-header">STUDENT INFORMATION</h3>
-
-                  <div class="student-profile-details-grid">
-                    <div class="student-photo-wrapper">
-                      <img id="detail-stu-photo" src="assets/student_ananya.jpg" alt="Student Photo" class="student-large-photo">
-                    </div>
-
-                    <div class="student-info-fields-grid">
-                      <div class="field-item">
-                        <span class="field-label">Name</span>
-                        <span class="field-value" id="detail-stu-name">: Ananya P</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">Roll No</span>
-                        <span class="field-value" id="detail-stu-roll">: 1</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">Gender</span>
-                        <span class="field-value" id="detail-stu-gender">: Female</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">Course</span>
-                        <span class="field-value" id="detail-stu-course">: BCA</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">Phone</span>
-                        <span class="field-value" id="detail-stu-phone">: 9876543210</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">Year</span>
-                        <span class="field-value" id="detail-stu-year">: 1st Year</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">Email</span>
-                        <span class="field-value" id="detail-stu-email">: ananya.p@gmail.com</span>
-                      </div>
-                      <div class="field-item">
-                        <span class="field-label">DOB</span>
-                        <span class="field-value" id="detail-stu-dob">: 15-07-2006</span>
-                      </div>
-                      <div class="field-item full-width-field">
-                        <span class="field-label">Address</span>
-                        <span class="field-value" id="detail-stu-address">: Kundapura, Uttara Kannada</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="student-tabs-row mt-4">
-                    <button class="stu-tab-btn active" data-tab="academic">ACADEMIC DETAILS</button>
-                    <button class="stu-tab-btn" data-tab="attendance">ATTENDANCE</button>
-                    <button class="stu-tab-btn" data-tab="examinations">EXAMINATIONS</button>
-                    <button class="stu-tab-btn" data-tab="achievements">ACHIEVEMENTS</button>
-                    <button class="stu-tab-btn" data-tab="documents">DOCUMENTS</button>
-                  </div>
-
-                  <div class="tab-contents-container mt-3">
-                    <div id="tab-content-academic" class="tab-pane active">
-                      <div class="academic-sub-tables-grid">
-                        <div class="sub-table-wrapper">
-                          <h4 class="sub-table-title">SEMESTER WISE MARKS</h4>
-                          <table class="styled-mini-table">
-                            <thead>
-                              <tr>
-                                <th>Semester</th>
-                                <th>SGPA</th>
-                                <th>Grade</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr><td>Semester 1</td><td>9.15</td><td><span class="grade-badge">A+</span></td></tr>
-                              <tr><td>Semester 2</td><td>9.32</td><td><span class="grade-badge">A+</span></td></tr>
-                              <tr><td>Semester 3</td><td>9.48</td><td><span class="grade-badge">A+</span></td></tr>
-                              <tr><td>Semester 4</td><td>-</td><td>-</td></tr>
-                            </tbody>
-                          </table>
-                        </div>
-
-                        <div class="sub-table-wrapper">
-                          <h4 class="sub-table-title">EXAMINATIONS</h4>
-                          <table class="styled-mini-table">
-                            <thead>
-                              <tr>
-                                <th>Exam Name</th>
-                                <th>Month/Year</th>
-                                <th>Result</th>
-                                <th>Grade</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr><td>IA Test 1</td><td>Aug 2024</td><td>89/100</td><td><span class="grade-badge">A+</span></td></tr>
-                              <tr><td>IA Test 2</td><td>Sep 2024</td><td>92/100</td><td><span class="grade-badge">A+</span></td></tr>
-                              <tr><td>Mid Semester</td><td>Oct 2024</td><td>90/100</td><td><span class="grade-badge">A+</span></td></tr>
-                              <tr><td>End Semester</td><td>Dec 2024</td><td>94/100</td><td><span class="grade-badge">A+</span></td></tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div id="tab-content-attendance" class="tab-pane">
-                      <p class="pane-text">Total Attendance Recorded: 98/120 Lectures (81.67%). Regular and punctual attendance maintained throughout term.</p>
-                    </div>
-
-                    <div id="tab-content-examinations" class="tab-pane">
-                      <p class="pane-text">Highest Score achieved in Data Structures (96%) and Java Programming (94%).</p>
-                    </div>
-
-                    <div id="tab-content-achievements" class="tab-pane">
-                      <p class="pane-text">🏆 1st Prize — Smart India Hackathon 2026 (National Level Winner)</p>
-                    </div>
-
-                    <div id="tab-content-documents" class="tab-pane">
-                      <p class="pane-text">📄 Aadhaar Card, 10th Marks Card, 12th Marks Card, Transfer Certificate verified.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="card-box attendance-summary-card mt-3">
-                  <h3 class="card-section-header">ATTENDANCE SUMMARY</h3>
-                  <div class="attendance-pills-row">
-                    <div class="att-summary-pill pill-blue-box">
-                      <i class="fa-solid fa-file-lines pill-box-icon"></i>
-                      <div class="pill-box-txt">
-                        <span class="pill-box-title">Total Classes</span>
-                        <span class="pill-box-num text-blue" id="sum-total-classes">120</span>
-                      </div>
-                    </div>
-
-                    <div class="att-summary-pill pill-green-box">
-                      <i class="fa-solid fa-user-check pill-box-icon"></i>
-                      <div class="pill-box-txt">
-                        <span class="pill-box-title">Classes Attended</span>
-                        <span class="pill-box-num text-green" id="sum-classes-attended">98</span>
-                      </div>
-                    </div>
-
-                    <div class="att-summary-pill pill-red-box">
-                      <i class="fa-solid fa-user-xmark pill-box-icon"></i>
-                      <div class="pill-box-txt">
-                        <span class="pill-box-title">Classes Absent</span>
-                        <span class="pill-box-num text-red" id="sum-classes-absent">22</span>
-                      </div>
-                    </div>
-
-                    <div class="att-summary-pill pill-orange-box">
-                      <div class="percentage-gauge-circle">
-                        <svg viewBox="0 0 36 36" class="circular-chart orange">
-                          <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                          <path class="circle" stroke-dasharray="81.67, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        </svg>
-                      </div>
-                      <div class="pill-box-txt">
-                        <span class="pill-box-title">Attendance %</span>
-                        <span class="pill-box-num text-orange" id="sum-attendance-percent">81.67%</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        </section>
-
-
-        <!-- =================================================================== -->
-        <!-- ACHIEVEMENTS PAGE -->
-        <!-- =================================================================== -->
-        <section id="view-achievements" class="view-panel">
-          <div class="page-container">
-
-            <div class="filter-controls-card card-box">
-              <div class="filters-row">
-                <div class="filter-group">
-                  <label>Academic Year</label>
-                  <select id="filter-academic-year" class="styled-select">
-                    <option value="All">All Years</option>
-                    <option value="2025-26" selected>2025-26</option>
-                    <option value="2024-25">2024-25</option>
-                    <option value="2023-24">2023-24</option>
-                    <option value="2022-23">2022-23</option>
-                  </select>
-                </div>
-
-                <div class="filter-group">
-                  <label>Achievement Type</label>
-                  <select id="filter-achievement-type" class="styled-select">
-                    <option value="All" selected>All</option>
-                    <option value="National">National</option>
-                    <option value="State">State</option>
-                  </select>
-                </div>
-
-                <div class="filter-group search-group">
-                  <div class="search-input-wrapper">
-                    <input type="text" id="search-achievements" placeholder="Search student or achievement...">
-                    <button class="btn-search-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
-                  </div>
-                </div>
-
-                <button type="button" id="btn-toggle-add-achieve" class="btn-primary-blue">
-                  <i class="fa-solid fa-plus-circle"></i> ADD ACHIEVEMENT
-                </button>
-              </div>
-            </div>
-
-            <!-- COLLAPSIBLE ADD ACHIEVEMENT FORM CARD -->
-            <div class="card-box hidden-form-card" id="card-add-achievement-form">
-              <h3 class="card-section-header"><i class="fa-solid fa-award"></i> ADD NEW STUDENT ACHIEVEMENT</h3>
-              <form id="form-add-achievement" onsubmit="return false;" class="achievement-add-grid">
-                <div class="form-group-styled">
-                  <label for="new-achieve-year">Academic Year</label>
-                  <select id="new-achieve-year" class="form-select-styled">
-                    <option value="2025-26" selected>2025-26</option>
-                    <option value="2024-25">2024-25</option>
-                    <option value="2023-24">2023-24</option>
-                    <option value="2022-23">2022-23</option>
-                  </select>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="new-achieve-name">Student Name</label>
-                  <input type="text" id="new-achieve-name" placeholder="e.g. Ananya P" required>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="new-achieve-course">Course</label>
-                  <select id="new-achieve-course" class="form-select-styled">
-                    <option value="BCA">BCA</option>
-                    <option value="B.Com">B.Com</option>
-                    <option value="BBA">BBA</option>
-                  </select>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="new-achieve-title">Achievement / Event Name</label>
-                  <input type="text" id="new-achieve-title" placeholder="e.g. Smart India Hackathon 2026" required>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="new-achieve-level">Level</label>
-                  <select id="new-achieve-level" class="form-select-styled">
-                    <option value="National">National</option>
-                    <option value="State">State</option>
-                    <option value="University">University</option>
-                  </select>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="new-achieve-award">Position / Award</label>
-                  <input type="text" id="new-achieve-award" placeholder="e.g. Winner / 1st Prize" required>
-                </div>
-
-                <div class="form-group-styled">
-                  <label for="new-achieve-date">Event Date</label>
-                  <input type="date" id="new-achieve-date" value="2026-08-25" required>
-                </div>
-
-                <div class="form-actions-row full-width-action">
-                  <button type="submit" id="btn-submit-achievement" class="btn-primary-blue"><i class="fa-solid fa-check"></i> SAVE ACHIEVEMENT</button>
-                  <button type="button" id="btn-cancel-achievement" class="btn-secondary-gray">CANCEL</button>
-                </div>
-              </form>
-            </div>
-
-            <!-- 4 Stat Cards Row -->
-            <div class="achieve-metrics-grid mt-3">
-              <div class="metric-pill-card pill-green-light">
-                <div class="pill-icon icon-green"><i class="fa-solid fa-trophy"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">Total Achievements</span>
-                  <span class="pill-number" id="kpi-total-achieve">28</span>
-                </div>
-              </div>
-
-              <div class="metric-pill-card pill-blue-light">
-                <div class="pill-icon icon-blue"><i class="fa-solid fa-ribbon"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">National Level</span>
-                  <span class="pill-number" id="kpi-national-achieve">14</span>
-                </div>
-              </div>
-
-              <div class="metric-pill-card pill-purple-light">
-                <div class="pill-icon icon-purple"><i class="fa-solid fa-globe"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">State Level</span>
-                  <span class="pill-number" id="kpi-state-achieve">9</span>
-                </div>
-              </div>
-
-              <div class="metric-pill-card pill-orange-light">
-                <div class="pill-icon icon-orange"><i class="fa-solid fa-star"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">Best Performer</span>
-                  <span class="pill-number-txt" id="kpi-best-performer">Ananya P</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- ACHIEVEMENT LIST TABLE CARD -->
-            <div class="card-box mt-4">
-              <h3 class="card-section-header">ACHIEVEMENT LIST</h3>
-              <div class="table-responsive">
-                <table class="styled-data-table" id="table-achievements">
-                  <thead>
-                    <tr>
-                      <th>Sl No</th>
-                      <th>Academic Year</th>
-                      <th>Student Name</th>
-                      <th>Course</th>
-                      <th>Achievement / Event</th>
-                      <th>Level</th>
-                      <th>Position / Award</th>
-                      <th>Date</th>
-                    </tr>
-                  </thead>
-                  <tbody id="achievements-table-body">
-                    <tr>
-                      <td>1</td>
-                      <td>2025-26</td>
-                      <td>
-                        <div class="table-user-cell">
-                          <img src="assets/student_ananya.jpg" class="user-avatar-tiny" alt="Ananya">
-                          <span>Ananya P</span>
-                        </div>
-                      </td>
-                      <td>BCA</td>
-                      <td>Smart India Hackathon 2026</td>
-                      <td><span class="badge badge-level">National</span></td>
-                      <td><span class="badge badge-winner">Winner</span></td>
-                      <td>15-03-2026</td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>2024-25</td>
-                      <td>
-                        <div class="table-user-cell">
-                          <div class="user-avatar-tiny avatar-placeholder">BS</div>
-                          <span>Bharath S</span>
-                        </div>
-                      </td>
-                      <td>B.Com</td>
-                      <td>Inter College Quiz Competition</td>
-                      <td><span class="badge badge-level">State</span></td>
-                      <td><span class="badge badge-award">1st Prize</span></td>
-                      <td>21-01-2025</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>2023-24</td>
-                      <td>
-                        <div class="table-user-cell">
-                          <div class="user-avatar-tiny avatar-placeholder">CM</div>
-                          <span>Chaithra M</span>
-                        </div>
-                      </td>
-                      <td>BCA</td>
-                      <td>Project Expo</td>
-                      <td><span class="badge badge-level">National</span></td>
-                      <td><span class="badge badge-award">2nd Prize</span></td>
-                      <td>12-09-2024</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>2023-24</td>
-                      <td>
-                        <div class="table-user-cell">
-                          <div class="user-avatar-tiny avatar-placeholder">DR</div>
-                          <span>Deepak R</span>
-                        </div>
-                      </td>
-                      <td>BBA</td>
-                      <td>Youth Festival</td>
-                      <td><span class="badge badge-level">State</span></td>
-                      <td><span class="badge badge-winner">Best Performer</span></td>
-                      <td>05-02-2024</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>2023-24</td>
-                      <td>
-                        <div class="table-user-cell">
-                          <div class="user-avatar-tiny avatar-placeholder">HP</div>
-                          <span>Harshitha P</span>
-                        </div>
-                      </td>
-                      <td>B.Com</td>
-                      <td>Business Plan Competition</td>
-                      <td><span class="badge badge-level">National</span></td>
-                      <td><span class="badge badge-award">Finalist</span></td>
-                      <td>20-11-2023</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="table-bottom-actions mt-3">
-                <button type="button" class="btn-primary-blue" id="btn-view-all-achieve">VIEW ALL ACHIEVEMENTS</button>
-                <div class="right-export-btns">
-                  <button type="button" class="btn-export-green" id="btn-export-achieve"><i class="fa-solid fa-file-excel"></i> EXPORT</button>
-                  <button type="button" class="btn-print-blue" id="btn-print-achieve"><i class="fa-solid fa-print"></i> PRINT</button>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-
-        <!-- =================================================================== -->
-        <!-- STATISTICS VIEW (CRISP 540PX FIXED LAYOUT & PERCENTAGE NEAR TO YEARS) -->
-        <!-- =================================================================== -->
-        <section id="view-statistics" class="view-panel">
-          <div class="page-container">
-            <div class="card-box">
-              <h3 class="card-section-header"><i class="fa-solid fa-chart-line"></i> CAMPUS STATISTICAL OVERVIEW & ACADEMIC GROWTH</h3>
-              <p class="section-sub-desc">Yearwise Academic Pass Percentage & Attendance Trend Line Graph with Department Filter Buttons.</p>
-
-              <!-- Metric Pills -->
-              <div class="achieve-metrics-grid mt-3">
-                <div class="metric-pill-card pill-green-light">
-                  <div class="pill-icon icon-green"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                  <div class="pill-details">
-                    <span class="pill-title">Overall Pass Rate</span>
-                    <span class="pill-number">97.6%</span>
-                  </div>
-                </div>
-
-                <div class="metric-pill-card pill-blue-light">
-                  <div class="pill-icon icon-blue"><i class="fa-solid fa-graduation-cap"></i></div>
-                  <div class="pill-details">
-                    <span class="pill-title">Top Course Growth</span>
-                    <span class="pill-number-txt">BCA (98.5%)</span>
-                  </div>
-                </div>
-
-                <div class="metric-pill-card pill-purple-light">
-                  <div class="pill-icon icon-purple"><i class="fa-solid fa-chart-pie"></i></div>
-                  <div class="pill-details">
-                    <span class="pill-title">YoY Growth</span>
-                    <span class="pill-number">+2.7%</span>
-                  </div>
-                </div>
-
-                <div class="metric-pill-card pill-orange-light">
-                  <div class="pill-icon icon-orange"><i class="fa-solid fa-medal"></i></div>
-                  <div class="pill-details">
-                    <span class="pill-title">Distinction Rate</span>
-                    <span class="pill-number">43.2%</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SCREENSHOT DESIGN MATCH LINE GRAPH CARD -->
-              <div class="card-box mt-4">
-                <div class="graph-header-controls-row">
-                  <h4 class="graph-title-screenshot mb-0" id="graph-header-title">
-                    YEAR WISE ACADEMIC PASS (%)
-                  </h4>
-
-                  <!-- DEPARTMENT SELECTION BUTTONS FOR GRAPH -->
-                  <div class="graph-toggle-buttons-row">
-                    <button type="button" class="btn-graph-dept active" data-graph-dept="overall">
-                      <i class="fa-solid fa-globe"></i> OVERALL
-                    </button>
-                    <button type="button" class="btn-graph-dept btn-bca" data-graph-dept="bca">
-                      <i class="fa-solid fa-laptop-code"></i> BCA
-                    </button>
-                    <button type="button" class="btn-graph-dept btn-bcom" data-graph-dept="bcom">
-                      <i class="fa-solid fa-chart-line"></i> B.COM
-                    </button>
-                    <button type="button" class="btn-graph-dept btn-bba" data-graph-dept="bba">
-                      <i class="fa-solid fa-briefcase"></i> BBA
-                    </button>
-                  </div>
-                </div>
-
-                <!-- HORIZONTALLY SCROLLABLE GRAPH CONTAINER WITH ZERO MIDDLE GAP & PERCENTAGE NEAR TO YEARS -->
-                <div class="scrollable-graph-viewport mt-3">
-                  <div class="line-graph-inner-layout">
-                    <div class="line-y-axis-screenshot">
-                      <span>100</span>
-                      <span>50</span>
-                      <span>0</span>
-                    </div>
-
-                    <div class="line-svg-scroll-content">
-                      <svg viewBox="0 0 540 175" class="academic-line-svg-scroll" id="svg-academic-scroll-chart">
-                        
-                        <!-- FULL BLEED HORIZONTAL BACKGROUND GRID LINES TOUCHING Y-AXIS DIRECTLY -->
-                        <line x1="0" y1="12" x2="540" y2="12" class="light-bg-grid-line-full" />
-                        <line x1="0" y1="78" x2="540" y2="78" class="light-bg-grid-line-full" />
-                        <line x1="0" y1="144" x2="540" y2="144" class="light-bg-grid-line-full" />
-
-                        <!-- CONTINUOUS VERTICAL DASHED LINES FROM TOP THROUGH NODE TO YEAR -->
-                        <line x1="40" y1="5" x2="40" y2="175" class="light-bg-grid-line-full" />
-                        <line x1="130" y1="5" x2="130" y2="175" class="light-bg-grid-line-full" />
-                        <line x1="220" y1="5" x2="220" y2="175" class="light-bg-grid-line-full" />
-                        <line x1="310" y1="5" x2="310" y2="175" class="light-bg-grid-line-full" />
-                        <line x1="400" y1="5" x2="400" y2="175" class="light-bg-grid-line-full" />
-                        <line x1="490" y1="5" x2="490" y2="175" class="light-bg-grid-line-full" />
-
-                        <!-- Smooth Path Line (Green style matching screenshot) -->
-                        <path id="svg-scroll-main-path" d="M 40 34 L 130 115 L 220 24 L 310 20 L 400 14 L 490 10" class="graph-path-line-green" />
-
-                        <!-- Data Point Nodes with NEARBY Percentages -->
-                        <g class="data-point-node" id="node-point-1">
-                          <circle cx="40" cy="34" r="5" class="data-circle-green" />
-                          <text x="40" y="22" class="point-near-val-screenshot">84%</text>
-                        </g>
-
-                        <g class="data-point-node" id="node-point-2">
-                          <circle cx="130" cy="115" r="6" class="data-circle-red" />
-                          <text x="130" y="103" class="point-near-val-screenshot text-red-svg font-bold">68% (Less)</text>
-                        </g>
-
-                        <g class="data-point-node" id="node-point-3">
-                          <circle cx="220" cy="24" r="5" class="data-circle-green" />
-                          <text x="220" y="12" class="point-near-val-screenshot">91%</text>
-                        </g>
-
-                        <g class="data-point-node" id="node-point-4">
-                          <circle cx="310" cy="20" r="5" class="data-circle-green" />
-                          <text x="310" y="8" class="point-near-val-screenshot">94%</text>
-                        </g>
-
-                        <g class="data-point-node" id="node-point-5">
-                          <circle cx="400" cy="14" r="5" class="data-circle-green" />
-                          <text x="400" y="4" class="point-near-val-screenshot">97%</text>
-                        </g>
-
-                        <g class="data-point-node" id="node-point-6">
-                          <circle cx="490" cy="10" r="5" class="data-circle-green" />
-                          <text x="490" y="2" class="point-near-val-screenshot font-bold text-blue">98%</text>
-                        </g>
-
-                        <!-- SVG X-AXIS YEAR LABELS ALIGNED RIGHT UNDER BASELINE WITH ZERO EXTRA GAP -->
-                        <g class="x-axis-year-group">
-                          <text x="40" y="158" class="svg-year-text">2020-21</text>
-                          <text x="130" y="158" class="svg-year-text text-red-svg font-bold">2021-22 (Less)</text>
-                          <text x="220" y="158" class="svg-year-text">2022-23</text>
-                          <text x="310" y="158" class="svg-year-text">2023-24</text>
-                          <text x="400" y="158" class="svg-year-text">2024-25</text>
-                          <text x="490" y="158" class="svg-year-text text-blue-svg font-bold">2025-26</text>
-                        </g>
-
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="scroll-hint-bar">
-                  <i class="fa-solid fa-arrow-left-long"></i> Scroll horizontally to view yearwise academic pass trends <i class="fa-solid fa-arrow-right-long"></i>
-                </div>
-              </div>
-
-              <!-- DEPARTMENT CLASS PASS PERCENTAGE BREAKDOWN CARD -->
-              <div class="card-box mt-4" id="card-dept-class-breakdown">
-                <h4 class="card-section-header" id="breakdown-card-title"><i class="fa-solid fa-sitemap text-blue"></i> OVERALL DEPARTMENT CLASS PASS PERCENTAGE BREAKDOWN</h4>
-                <div class="dept-class-cards-grid" id="dept-class-cards-container">
-                  
-                  <div class="class-stat-box box-blue">
-                    <span class="class-stat-title">1st Year Class</span>
-                    <span class="class-stat-percent" id="val-class-1st">95.4%</span>
-                    <span class="class-stat-sub">Appeared: 420 | Passed: 401</span>
-                  </div>
-
-                  <div class="class-stat-box box-green">
-                    <span class="class-stat-title">2nd Year Class</span>
-                    <span class="class-stat-percent" id="val-class-2nd">97.8%</span>
-                    <span class="class-stat-sub">Appeared: 380 | Passed: 372</span>
-                  </div>
-
-                  <div class="class-stat-box box-purple">
-                    <span class="class-stat-title">3rd Year Class</span>
-                    <span class="class-stat-percent" id="val-class-3rd">98.9%</span>
-                    <span class="class-stat-sub">Appeared: 350 | Passed: 346</span>
-                  </div>
-
-                </div>
-              </div>
-
-              <!-- DEPARTMENT BREAKDOWN TABLE -->
-              <div class="card-box mt-4">
-                <h4 class="card-section-header">DEPARTMENT ACADEMIC PERFORMANCE BREAKDOWN</h4>
-                <div class="table-responsive">
-                  <table class="styled-data-table">
-                    <thead>
-                      <tr>
-                        <th>Department</th>
-                        <th>Total Appeared</th>
-                        <th>Passed</th>
-                        <th>Failed</th>
-                        <th>Distinction</th>
-                        <th>Pass Percentage</th>
-                        <th>Academic Trend</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><strong>BCA</strong></td>
-                        <td>340</td>
-                        <td>335</td>
-                        <td><span class="text-red font-bold">5</span></td>
-                        <td>162</td>
-                        <td><span class="badge badge-winner">98.5%</span></td>
-                        <td><i class="fa-solid fa-arrow-trend-up text-green"></i> +3.2% Growth</td>
-                      </tr>
-                      <tr>
-                        <td><strong>B.Com</strong></td>
-                        <td>480</td>
-                        <td>466</td>
-                        <td><span class="text-red font-bold">14</span></td>
-                        <td>195</td>
-                        <td><span class="badge badge-winner">97.1%</span></td>
-                        <td><i class="fa-solid fa-arrow-trend-up text-green"></i> +2.1% Growth</td>
-                      </tr>
-                      <tr>
-                        <td><strong>BBA</strong></td>
-                        <td>210</td>
-                        <td>203</td>
-                        <td><span class="text-red font-bold">7</span></td>
-                        <td>88</td>
-                        <td><span class="badge badge-winner">96.7%</span></td>
-                        <td><i class="fa-solid fa-arrow-trend-up text-green"></i> +2.4% Growth</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-
-        <!-- =================================================================== -->
-        <!-- COMPLAINTS VIEW -->
-        <!-- =================================================================== -->
-        <section id="view-complaint" class="view-panel">
-          <div class="page-container">
-
-            <div class="filter-controls-card card-box">
-              <div class="filters-row">
-                <div class="filter-group">
-                  <label>Filter Status</label>
-                  <select id="filter-complaint-status" class="styled-select">
-                    <option value="All" selected>All Complaints</option>
-                    <option value="Pending">Pending</option>
-                    <option value="In Review">In Review</option>
-                    <option value="Resolved">Resolved</option>
-                  </select>
-                </div>
-
-                <div class="filter-group">
-                  <label>Department</label>
-                  <select id="filter-complaint-dept" class="styled-select">
-                    <option value="All">All Departments</option>
-                    <option value="BCA">BCA</option>
-                    <option value="B.Com">B.Com</option>
-                    <option value="BBA">BBA</option>
-                  </select>
-                </div>
-
-                <div class="filter-group search-group">
-                  <div class="search-input-wrapper">
-                    <input type="text" id="search-complaints" placeholder="Search by student name or grievance...">
-                    <button class="btn-search-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Stat Summary Cards -->
-            <div class="achieve-metrics-grid mt-3">
-              <div class="metric-pill-card pill-blue-light">
-                <div class="pill-icon icon-blue"><i class="fa-solid fa-comments"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">Total Complaints</span>
-                  <span class="pill-number" id="kpi-total-complaints">12</span>
-                </div>
-              </div>
-
-              <div class="metric-pill-card pill-orange-light">
-                <div class="pill-icon icon-orange"><i class="fa-solid fa-clock"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">Pending Action</span>
-                  <span class="pill-number" id="kpi-pending-complaints">3</span>
-                </div>
-              </div>
-
-              <div class="metric-pill-card pill-purple-light">
-                <div class="pill-icon icon-purple"><i class="fa-solid fa-eye"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">Under Review</span>
-                  <span class="pill-number" id="kpi-review-complaints">2</span>
-                </div>
-              </div>
-
-              <div class="metric-pill-card pill-green-light">
-                <div class="pill-icon icon-green"><i class="fa-solid fa-circle-check"></i></div>
-                <div class="pill-details">
-                  <span class="pill-title">Resolved Issues</span>
-                  <span class="pill-number" id="kpi-resolved-complaints">7</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- COMPLAINTS LOG TABLE CARD -->
-            <div class="card-box mt-4">
-              <h3 class="card-section-header">STUDENT COMPLAINTS LOG & RESOLUTION TRACKER</h3>
-              <div class="table-responsive">
-                <table class="styled-data-table" id="table-complaints">
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Student Name</th>
-                      <th>Roll No</th>
-                      <th>Dept</th>
-                      <th>Category</th>
-                      <th>Grievance Subject</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody id="complaints-table-body">
-                    <tr>
-                      <td><strong>1</strong></td>
-                      <td>Ananya P</td>
-                      <td>1</td>
-                      <td>BCA</td>
-                      <td>Library</td>
-                      <td>Request for Python programming reference books in lab</td>
-                      <td>22-08-2026</td>
-                      <td><span class="badge badge-pending">Pending</span></td>
-                      <td><button class="btn-action-sm btn-resolve-action" data-cmp="1">Resolve</button></td>
-                    </tr>
-                    <tr>
-                      <td><strong>2</strong></td>
-                      <td>Bharath S</td>
-                      <td>2</td>
-                      <td>B.Com</td>
-                      <td>Infrastructure</td>
-                      <td>Projector replacement in Seminar Hall B</td>
-                      <td>20-08-2026</td>
-                      <td><span class="badge badge-review">In Review</span></td>
-                      <td><button class="btn-action-sm btn-resolve-action" data-cmp="2">Resolve</button></td>
-                    </tr>
-                    <tr>
-                      <td><strong>3</strong></td>
-                      <td>Chaithra M</td>
-                      <td>3</td>
-                      <td>BCA</td>
-                      <td>Lab Equipment</td>
-                      <td>System #14 RAM upgrade request for Web Dev project</td>
-                      <td>18-08-2026</td>
-                      <td><span class="badge badge-resolved">Resolved</span></td>
-                      <td><button class="btn-action-sm btn-done-action" disabled>Resolved</button></td>
-                    </tr>
-                    <tr>
-                      <td><strong>4</strong></td>
-                      <td>Deepak R</td>
-                      <td>4</td>
-                      <td>BBA</td>
-                      <td>Canteen</td>
-                      <td>Request for more drinking water dispensers on 2nd Floor</td>
-                      <td>15-08-2026</td>
-                      <td><span class="badge badge-resolved">Resolved</span></td>
-                      <td><button class="btn-action-sm btn-done-action" disabled>Resolved</button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-
-          </div>
-        </section>
-
+      <div class="top-bar-right">
+        <span class="accreditation-pill">Affiliated to Mangalore University</span>
+        <span class="accreditation-pill">Govt. of Karnataka Approved</span>
       </div>
-    </main>
+    </div>
   </div>
 
-  <script src="app.js"></script>
+  <!-- =================================================================== -->
+  <!-- STICKY SITE NAVIGATION -->
+  <!-- =================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container nav-container">
+      <a href="#home" class="brand-link" id="brand-link">
+        <div class="brand-icon-wrap">
+          <i class="fa-solid fa-graduation-cap"></i>
+        </div>
+        <div class="brand-info">
+          <span class="brand-title">ABC COLLEGE OF SCIENCE</span>
+          <span class="brand-tagline">Attendance & Campus Management Portal</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Menu -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu">
+          <li><a href="#home" class="nav-link active">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#attendance" class="nav-link">Attendance</a></li>
+          <li><a href="#departments" class="nav-link">Departments</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header CTAs -->
+      <div class="header-actions">
+        <a href="portal.html" class="btn-portal-login" id="btn-header-login">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          <span>Portal Login</span>
+        </a>
+        <button class="mobile-toggle-btn" id="mobile-toggle" aria-label="Toggle Navigation Menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-nav-drawer" id="mobile-drawer">
+      <ul class="mobile-nav-menu">
+        <li><a href="#home" class="mobile-nav-link">Home</a></li>
+        <li><a href="#about" class="mobile-nav-link">About College</a></li>
+        <li><a href="#features" class="mobile-nav-link">Platform Features</a></li>
+        <li><a href="#attendance" class="mobile-nav-link">Attendance Insights</a></li>
+        <li><a href="#departments" class="mobile-nav-link">Academic Departments</a></li>
+        <li><a href="#contact" class="mobile-nav-link">Contact & Admissions</a></li>
+        <li>
+          <a href="portal.html" class="btn btn-primary" style="width:100%; margin-top:8px;">
+            <i class="fa-solid fa-arrow-right-to-bracket"></i> Access Workstation
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- =================================================================== -->
+  <!-- 1. HERO SECTION -->
+  <!-- =================================================================== -->
+  <section class="hero-section" id="home">
+    <div class="container hero-grid">
+      
+      <!-- Hero Left: Content -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>Official University Administration Platform</span>
+        </div>
+
+        <h1 class="hero-title">
+          Smart Attendance.<br>
+          <span>Better Campus</span> Management.
+        </h1>
+
+        <p class="hero-subtitle">
+          An intelligent college management platform that simplifies attendance tracking, student information, faculty management, and academic activities in one place.
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="portal.html" class="btn btn-primary" id="hero-cta-get-started">
+            <span>Get Started</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#features" class="btn btn-outline" id="hero-cta-features">
+            <i class="fa-solid fa-compass"></i>
+            <span>Explore Features</span>
+          </a>
+        </div>
+
+        <div class="hero-highlights">
+          <div class="hero-highlight-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Real-Time Biometrics</span>
+          </div>
+          <div class="hero-highlight-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>75% Shortfall Warnings</span>
+          </div>
+          <div class="hero-highlight-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Digital Grievances</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Right: Realistic Dashboard Preview Card -->
+      <div class="hero-visual">
+        <div class="dashboard-preview-card" id="dashboard-mockup">
+          
+          <div class="card-top-bar">
+            <div class="card-window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-amber"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="card-top-title">
+              <span class="live-pulse"></span>
+              <span>Live Attendance Stream</span>
+            </div>
+            <span class="card-date-badge" id="preview-date-badge"><i class="fa-regular fa-calendar-check"></i> Today</span>
+          </div>
+
+          <div class="card-body-content">
+            
+            <!-- KPI Tiles Grid -->
+            <div class="preview-kpi-grid">
+              
+              <div class="kpi-tile">
+                <div class="kpi-tile-header">
+                  <span class="kpi-label">Attendance Rate</span>
+                  <i class="fa-solid fa-chart-pie kpi-icon"></i>
+                </div>
+                <div class="kpi-val">92.4%</div>
+                <div class="kpi-sub">
+                  <i class="fa-solid fa-arrow-trend-up"></i>
+                  <span>+2.1% this week</span>
+                </div>
+              </div>
+
+              <div class="kpi-tile">
+                <div class="kpi-tile-header">
+                  <span class="kpi-label">Total Enrolled</span>
+                  <i class="fa-solid fa-users kpi-icon"></i>
+                </div>
+                <div class="kpi-val">1,480</div>
+                <div class="kpi-sub">Active Students</div>
+              </div>
+
+              <div class="kpi-tile">
+                <div class="kpi-tile-header">
+                  <span class="kpi-label">Present Today</span>
+                  <i class="fa-solid fa-user-check kpi-icon"></i>
+                </div>
+                <div class="kpi-val">1,368</div>
+                <div class="kpi-sub">In Lecture Halls</div>
+              </div>
+
+              <div class="kpi-tile">
+                <div class="kpi-tile-header">
+                  <span class="kpi-label">Absent Today</span>
+                  <i class="fa-solid fa-user-xmark kpi-icon" style="color:var(--danger)"></i>
+                </div>
+                <div class="kpi-val">112</div>
+                <div class="kpi-sub absent">Alerts Dispatched</div>
+              </div>
+
+            </div>
+
+            <!-- Department Attendance Breakdown -->
+            <div class="dept-attendance-box">
+              <div class="dept-box-title">
+                <span>Department Attendance Status</span>
+                <span style="font-size:12px; color:var(--accent-sky); font-weight:600;">Full Day Record</span>
+              </div>
+
+              <div class="dept-bar-group">
+                <div class="dept-bar-item">
+                  <div class="dept-bar-labels">
+                    <span>BCA (Computer Applications)</span>
+                    <span>94.2% (480 / 510)</span>
+                  </div>
+                  <div class="dept-bar-track">
+                    <div class="dept-bar-fill" style="width: 94.2%;"></div>
+                  </div>
+                </div>
+
+                <div class="dept-bar-item">
+                  <div class="dept-bar-labels">
+                    <span>B.Com (Commerce & Taxation)</span>
+                    <span>91.8% (459 / 500)</span>
+                  </div>
+                  <div class="dept-bar-track">
+                    <div class="dept-bar-fill bcom" style="width: 91.8%;"></div>
+                  </div>
+                </div>
+
+                <div class="dept-bar-item">
+                  <div class="dept-bar-labels">
+                    <span>BBA (Business Administration)</span>
+                    <span>91.0% (429 / 470)</span>
+                  </div>
+                  <div class="dept-bar-track">
+                    <div class="dept-bar-fill bba" style="width: 91.0%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- STATS COUNTER STRIP -->
+  <!-- =================================================================== -->
+  <section class="stats-strip" aria-label="Campus Performance Highlights">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">98.6<span>%</span></div>
+        <div class="stat-title">Attendance Tracking Accuracy</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1,480<span>+</span></div>
+        <div class="stat-title">Active Students Enrolled</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">45<span>+</span></div>
+        <div class="stat-title">Distinguished Faculty Mentors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100<span>%</span></div>
+        <div class="stat-title">Digital Redressal Resolution</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- 2. COLLEGE INFORMATION SECTION -->
+  <!-- =================================================================== -->
+  <section class="about-section" id="about">
+    <div class="container about-grid">
+      
+      <!-- Text Description Column -->
+      <div class="about-text-col">
+        <div class="section-tag">
+          <i class="fa-solid fa-building-columns"></i>
+          <span>Institutional Legacy</span>
+        </div>
+        
+        <h2 class="section-title">
+          ABC College of Science — Empowering Minds in Coastal Karnataka
+        </h2>
+
+        <p class="about-lead">
+          Established in Kundapura, ABC College of Science has consistently stood as a pillar of academic rigor, technological advancement, and holistic student development. Affiliated with prestigious <strong>Mangalore University</strong>, our campus blends time-tested pedagogy with state-of-the-art digital infrastructure.
+        </p>
+
+        <!-- Vision & Mission Grid -->
+        <div class="vision-mission-grid">
+          <div class="vm-card">
+            <div class="vm-card-header">
+              <div class="vm-icon">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+              <h3 class="vm-title">Our Vision</h3>
+            </div>
+            <p class="vm-desc">
+              To be a premier center of higher learning, cultivating ethical leaders, innovative thinkers, and industry-ready graduates equipped for global challenges.
+            </p>
+          </div>
+
+          <div class="vm-card">
+            <div class="vm-card-header">
+              <div class="vm-icon">
+                <i class="fa-solid fa-bullseye"></i>
+              </div>
+              <h3 class="vm-title">Our Mission</h3>
+            </div>
+            <p class="vm-desc">
+              To provide transformative education through contemporary curricula, transparent digital governance, dedicated mentorship, and strong industry linkages.
+            </p>
+          </div>
+        </div>
+
+        <!-- Campus Facilities Checklist -->
+        <div class="facilities-checklist">
+          <div class="facility-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Modern Computing & AI Labs</span>
+          </div>
+          <div class="facility-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Automated Digital Library</span>
+          </div>
+          <div class="facility-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>High-Speed Campus-Wide WiFi</span>
+          </div>
+          <div class="facility-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Smart Interactive Lecture Theatres</span>
+          </div>
+          <div class="facility-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Active Placement & Career Cell</span>
+          </div>
+          <div class="facility-item">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>Auditorium & Sports Complex</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Campus Image Column -->
+      <div class="about-media-col">
+        <div class="campus-card-frame">
+          <img src="assets/college_building.jpg" alt="ABC College of Science Campus Building in Kundapura" loading="lazy">
+          <div class="campus-badge-float">
+            <div>
+              <div class="float-badge-title">Kundapura Campus</div>
+              <div class="float-badge-sub">Karnataka - 576201 • Mangalore University</div>
+            </div>
+            <i class="fa-solid fa-building-columns float-badge-icon"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- 3. KEY FEATURES SECTION -->
+  <!-- =================================================================== -->
+  <section class="features-section" id="features">
+    <div class="container">
+      
+      <div class="section-header-center">
+        <div class="section-tag">
+          <i class="fa-solid fa-cubes"></i>
+          <span>Comprehensive Platform Modules</span>
+        </div>
+        <h2 class="section-title">Engineered for Academic Excellence & Transparency</h2>
+        <p class="section-desc">
+          Every component of our system is crafted to eliminate manual paperwork, enforce compliance with university rules, and support student success.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        
+        <!-- Card 1: Attendance Management -->
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-clipboard-user"></i>
+          </div>
+          <h3 class="feature-title">Attendance Management</h3>
+          <p class="feature-desc">
+            Automated session-wise and lecture-wise logging with biometric sync. Automatically flags students below 75% for mandatory condonation review.
+          </p>
+          <ul class="feature-bullet-list">
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> 1-click batch attendance marking</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Real-time absentee SMS/push alerts</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> University exam eligibility reports</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Student Information System -->
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-id-card-clip"></i>
+          </div>
+          <h3 class="feature-title">Student Information System</h3>
+          <p class="feature-desc">
+            Centralized profile repository keeping track of academic history, roll numbers, semester GPAs (SGPA), internal assessment marks, and contact records.
+          </p>
+          <ul class="feature-bullet-list">
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Complete SGPA & mark trajectories</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Instant digital student verification</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Secure parent contact synchronization</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: Faculty & Department Directory -->
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <h3 class="feature-title">Faculty Administration</h3>
+          <p class="feature-desc">
+            Faculty profile directories with department designations, academic qualifications, lecture schedules, and direct subject performance insights.
+          </p>
+          <ul class="feature-bullet-list">
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> HOD-level department oversight</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Syllabus coverage tracking</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Subject performance analytics</li>
+          </ul>
+        </div>
+
+        <!-- Card 4: Grievance Redressal -->
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-comments"></i>
+          </div>
+          <h3 class="feature-title">Grievance & Complaints Cell</h3>
+          <p class="feature-desc">
+            Transparent student redressal portal. Students file complaints categorized by Library, Infrastructure, or Canteen, with live tracking till resolution.
+          </p>
+          <ul class="feature-bullet-list">
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Pending, In Review, Resolved status</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Direct administrator escalation</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Verified closure documentation</li>
+          </ul>
+        </div>
+
+        <!-- Card 5: Achievements & Accolades -->
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <h3 class="feature-title">Achievements & Laurels</h3>
+          <p class="feature-desc">
+            Showcase outstanding accomplishments in Smart India Hackathon, state-level project expos, university ranks, and inter-collegiate competitions.
+          </p>
+          <ul class="feature-bullet-list">
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> National & State level award logs</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Student digital certificates</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Annual college honors gallery</li>
+          </ul>
+        </div>
+
+        <!-- Card 6: Academic Analytics & Growth -->
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <h3 class="feature-title">Statistical Intelligence</h3>
+          <p class="feature-desc">
+            Data-backed visualization of campus performance: interactive line charts for department growth, pass percentages, and 1st, 2nd, and 3rd year distributions.
+          </p>
+          <ul class="feature-bullet-list">
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Department comparative line graphs</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Class-wise academic breakdown</li>
+            <li class="feature-bullet-item"><i class="fa-solid fa-check"></i> Exportable compliance data</li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- 4. ATTENDANCE MANAGEMENT DEEP-DIVE & SIMULATOR -->
+  <!-- =================================================================== -->
+  <section class="attendance-spotlight-section" id="attendance">
+    <div class="container">
+      <div class="attendance-spotlight-card">
+        
+        <!-- Info Left -->
+        <div class="spotlight-info">
+          <div class="section-tag" style="background:rgba(56,189,248,0.2); color:#38bdf8;">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+            <span>University Attendance Standard</span>
+          </div>
+          <h3>Mangalore University 75% Attendance Benchmark</h3>
+          <p>
+            Under university guidelines, every student must maintain a minimum of 75% attendance in theory and practicals to qualify for end-semester examinations. Our system provides automated real-time tracking so students never face unexpected shortfalls.
+          </p>
+
+          <div class="attendance-rules-pills">
+            <div class="rule-pill">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>&ge; 85% Distinction Standing</span>
+            </div>
+            <div class="rule-pill">
+              <i class="fa-solid fa-check"></i>
+              <span>75% - 84% Regular Eligibility</span>
+            </div>
+            <div class="rule-pill" style="border-color:rgba(239,68,68,0.4); background:rgba(239,68,68,0.15);">
+              <i class="fa-solid fa-triangle-exclamation" style="color:#f87171;"></i>
+              <span>&lt; 75% Shortfall Warning</span>
+            </div>
+          </div>
+
+          <a href="portal.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.4); color:#ffffff;">
+            <span>Open Attendance Ledger</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Interactive Simulator Box Right -->
+        <div class="attendance-sim-box">
+          <div class="sim-header">
+            <span class="sim-title">Live Student Attendance Metric</span>
+            <span class="sim-badge-ok" id="sim-status-badge">Excellent Standing</span>
+          </div>
+
+          <div class="sim-meter-wrap">
+            <div class="sim-big-pct" id="sim-big-pct">92.5<span>%</span></div>
+            <div class="sim-status-desc" id="sim-status-desc">Student meets full university eligibility with distinction</div>
+          </div>
+
+          <div class="sim-calc-row">
+            <div>
+              <div class="calc-tile-label">Attended</div>
+              <div class="calc-tile-num" id="sim-attended-val">111</div>
+            </div>
+            <div>
+              <div class="calc-tile-label">Absent</div>
+              <div class="calc-tile-num" id="sim-absent-val">9</div>
+            </div>
+            <div>
+              <div class="calc-tile-label">Total Conducted</div>
+              <div class="calc-tile-num">120</div>
+            </div>
+          </div>
+
+          <!-- Simulator Action Controls -->
+          <div style="display:flex; gap:12px; margin-top:20px;">
+            <button type="button" class="btn btn-primary" id="btn-sim-present" style="flex:1; font-size:13px; padding:10px 14px; background:#0284c7;">
+              <i class="fa-solid fa-user-plus"></i> Simulate Present
+            </button>
+            <button type="button" class="btn btn-outline" id="btn-sim-absent" style="flex:1; font-size:13px; padding:10px 14px; border-color:rgba(255,255,255,0.3); color:#ffffff;">
+              <i class="fa-solid fa-user-minus"></i> Simulate Absent
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- 5. ACADEMIC DEPARTMENTS SECTION -->
+  <!-- =================================================================== -->
+  <section class="departments-section" id="departments">
+    <div class="container">
+      
+      <div class="section-header-center">
+        <div class="section-tag">
+          <i class="fa-solid fa-graduation-cap"></i>
+          <span>Academic Programs</span>
+        </div>
+        <h2 class="section-title">Undergraduate Streams & Departments</h2>
+        <p class="section-desc">
+          Career-focused degree programs with dedicated departmental faculties, tailored computer laboratories, and specialized course tracks.
+        </p>
+      </div>
+
+      <div class="dept-cards-grid">
+        
+        <!-- Department 1: BCA -->
+        <div class="dept-card">
+          <span class="dept-code-tag">BCA STREAM</span>
+          <h3 class="dept-title">Bachelor of Computer Applications</h3>
+          <p class="dept-desc">
+            Empowering students with hands-on skills in Python, Java, Artificial Intelligence, Cloud Computing, Database Management, and Full-Stack Web Development.
+          </p>
+
+          <div class="dept-meta-grid">
+            <div class="dept-meta-item">
+              <span class="meta-sub">Head of Dept</span>
+              <span class="meta-val">Dr. Satish Kumar</span>
+            </div>
+            <div class="dept-meta-item">
+              <span class="meta-sub">Enrolled Students</span>
+              <span class="meta-val">510 Students</span>
+            </div>
+          </div>
+
+          <a href="portal.html?role=student" class="dept-action-link">
+            <span>Explore BCA Curriculum & Attendance</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Department 2: B.Com -->
+        <div class="dept-card">
+          <span class="dept-code-tag" style="color:#2563eb; background:#eff6ff;">B.COM STREAM</span>
+          <h3 class="dept-title">Bachelor of Commerce</h3>
+          <p class="dept-desc">
+            Specialized coaching in Financial Accounting, Corporate Taxation, GST compliance, Modern Banking Operations, Business Law, and Financial Markets.
+          </p>
+
+          <div class="dept-meta-grid">
+            <div class="dept-meta-item">
+              <span class="meta-sub">Core Focus</span>
+              <span class="meta-val">Finance & Taxation</span>
+            </div>
+            <div class="dept-meta-item">
+              <span class="meta-sub">Enrolled Students</span>
+              <span class="meta-val">500 Students</span>
+            </div>
+          </div>
+
+          <a href="portal.html?role=student" class="dept-action-link">
+            <span>Explore B.Com Curriculum & Attendance</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Department 3: BBA -->
+        <div class="dept-card">
+          <span class="dept-code-tag" style="color:#0284c7; background:#e0f2fe;">BBA STREAM</span>
+          <h3 class="dept-title">Bachelor of Business Administration</h3>
+          <p class="dept-desc">
+            Fostering entrepreneurial mindset, managerial decision-making, Human Resource Management, Strategic Marketing, and Supply Chain Dynamics.
+          </p>
+
+          <div class="dept-meta-grid">
+            <div class="dept-meta-item">
+              <span class="meta-sub">Core Focus</span>
+              <span class="meta-val">Management & HR</span>
+            </div>
+            <div class="dept-meta-item">
+              <span class="meta-sub">Enrolled Students</span>
+              <span class="meta-val">470 Students</span>
+            </div>
+          </div>
+
+          <a href="portal.html?role=student" class="dept-action-link">
+            <span>Explore BBA Curriculum & Attendance</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- 6. ROLE-BASED PORTALS SECTION -->
+  <!-- =================================================================== -->
+  <section class="portals-section" id="portals">
+    <div class="container">
+      
+      <div class="section-header-center">
+        <div class="section-tag">
+          <i class="fa-solid fa-lock"></i>
+          <span>Secure Role Access</span>
+        </div>
+        <h2 class="section-title">One Platform, Three Tailored Portals</h2>
+        <p class="section-desc">
+          Sign in using your authorized college credentials to access dedicated administrative, faculty, or student modules.
+        </p>
+      </div>
+
+      <div class="roles-grid">
+        
+        <!-- Role 1: Administrator -->
+        <div class="role-entry-card">
+          <div class="role-avatar-wrap">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <h3 class="role-name">Administrator</h3>
+          <p class="role-text">
+            Complete institutional control across all departments, grievance redressal approvals, analytics, and faculty directories.
+          </p>
+          <ul class="role-perks">
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Campus statistics & growth charts</li>
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Manage complaints & resolutions</li>
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Full student & faculty profile control</li>
+          </ul>
+          <a href="portal.html?role=admin" class="btn-role-access" id="role-admin-cta">
+            <span>Admin Workstation</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Role 2: Faculty -->
+        <div class="role-entry-card">
+          <div class="role-avatar-wrap" style="background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 100%);">
+            <i class="fa-solid fa-chalkboard-user"></i>
+          </div>
+          <h3 class="role-name">Faculty Member</h3>
+          <p class="role-text">
+            Log daily student attendance, record internal assessments marks, access student profiles, and update curriculum progress.
+          </p>
+          <ul class="role-perks">
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Fast batch attendance recording</li>
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Internal marks entry & SGPA view</li>
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Department student performance tracker</li>
+          </ul>
+          <a href="portal.html?role=faculty" class="btn-role-access" id="role-faculty-cta">
+            <span>Faculty Workstation</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Role 3: Student -->
+        <div class="role-entry-card">
+          <div class="role-avatar-wrap" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <h3 class="role-name">Enrolled Student</h3>
+          <p class="role-text">
+            Inspect real-time attendance percentage, check internal assessment scores, review university results, and submit grievances.
+          </p>
+          <ul class="role-perks">
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Subject-wise attendance & 75% radar</li>
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Semester SGPA & assessment history</li>
+            <li class="role-perk-item"><i class="fa-solid fa-check"></i> Digital grievance ticket submission</li>
+          </ul>
+          <a href="portal.html?role=student" class="btn-role-access" id="role-student-cta">
+            <span>Student Workstation</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- 7. CONTACT & ADMISSIONS SECTION -->
+  <!-- =================================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container contact-grid">
+      
+      <!-- Contact Info -->
+      <div class="contact-info-col">
+        <div class="section-tag">
+          <i class="fa-solid fa-headset"></i>
+          <span>Reach Our Campus</span>
+        </div>
+        
+        <h2 class="section-title">Get in Touch with Administration</h2>
+        <p class="section-desc" style="margin-bottom:28px;">
+          Have questions regarding admissions, fee schedules, or student credentials? Our administrative team is here to assist.
+        </p>
+
+        <div class="contact-card-box">
+          
+          <div class="contact-item">
+            <div class="contact-icon-box">
+              <i class="fa-solid fa-location-dot"></i>
+            </div>
+            <div>
+              <div class="contact-item-label">Campus Address</div>
+              <div class="contact-item-val">
+                ABC College of Science, Kundapura,<br>
+                Uttara Kannada, Karnataka - 576201
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box">
+              <i class="fa-solid fa-phone"></i>
+            </div>
+            <div>
+              <div class="contact-item-label">Principal's Office</div>
+              <div class="contact-item-val">+91 98450 12345</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <div class="contact-item-label">Official Email</div>
+              <div class="contact-item-val">principal@abccollege.edu / info@abccollege.edu</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon-box">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+            <div>
+              <div class="contact-item-label">Office Working Hours</div>
+              <div class="contact-item-val">Monday - Saturday: 9:00 AM – 5:00 PM</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Contact Inquiry Form -->
+      <div class="contact-form-col">
+        <div class="contact-form-box">
+          <h3 style="font-family:var(--font-heading); font-size:20px; font-weight:700; color:var(--primary-navy); margin-bottom:8px;">
+            Send an Inquiry
+          </h3>
+          <p style="font-size:14px; color:var(--text-muted); margin-bottom:24px;">
+            Fill out the form below and our office will get back to you within 24 hours.
+          </p>
+
+          <form id="campus-contact-form">
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="form-name" class="form-label">Full Name *</label>
+                <input type="text" id="form-name" class="form-control" placeholder="e.g. Ramesh Kumar" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-email" class="form-label">Email Address *</label>
+                <input type="email" id="form-email" class="form-control" placeholder="e.g. ramesh@gmail.com" required>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-group">
+                <label for="form-role" class="form-label">I am a *</label>
+                <select id="form-role" class="form-control">
+                  <option value="Student">Prospective / Current Student</option>
+                  <option value="Parent">Parent / Guardian</option>
+                  <option value="Faculty">Faculty / Researcher</option>
+                  <option value="Other">Other Inquiry</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="form-dept" class="form-label">Interested Department</label>
+                <select id="form-dept" class="form-control">
+                  <option value="BCA">BCA (Computer Applications)</option>
+                  <option value="BCom">B.Com (Commerce & Taxation)</option>
+                  <option value="BBA">BBA (Business Administration)</option>
+                  <option value="General">General Campus Inquiry</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="form-subject" class="form-label">Subject *</label>
+              <input type="text" id="form-subject" class="form-control" placeholder="Inquiry about admissions, fees, or attendance records" required>
+            </div>
+
+            <div class="form-group">
+              <label for="form-message" class="form-label">Message *</label>
+              <textarea id="form-message" class="form-control" placeholder="Please write your detailed message or query..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width:100%;" id="btn-submit-inquiry">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span>Submit Message to Office</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =================================================================== -->
+  <!-- FOOTER -->
+  <!-- =================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-top-grid">
+        
+        <!-- Brand Info -->
+        <div class="footer-brand-col">
+          <div class="brand-link" style="color:#ffffff;">
+            <div class="brand-icon-wrap" style="box-shadow:none;">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <div class="brand-info">
+              <span class="footer-brand-title">ABC COLLEGE OF SCIENCE</span>
+              <span style="font-size:12px; color:#94a3b8;">Kundapura, Karnataka - 576201</span>
+            </div>
+          </div>
+          <p class="footer-brand-desc">
+            Affiliated with Mangalore University. A premier higher education institution delivering accredited undergraduate degrees in BCA, B.Com, and BBA with digital governance.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a href="#home">Home</a></li>
+            <li class="footer-link-item"><a href="#about">About College</a></li>
+            <li class="footer-link-item"><a href="#features">Features</a></li>
+            <li class="footer-link-item"><a href="#attendance">Attendance Ledger</a></li>
+            <li class="footer-link-item"><a href="#departments">Departments</a></li>
+          </ul>
+        </div>
+
+        <!-- Academic Portals -->
+        <div>
+          <h4 class="footer-col-title">Portal Access</h4>
+          <ul class="footer-links-list">
+            <li class="footer-link-item"><a href="portal.html?role=admin">Administrator Portal</a></li>
+            <li class="footer-link-item"><a href="portal.html?role=faculty">Faculty Portal</a></li>
+            <li class="footer-link-item"><a href="portal.html?role=student">Student Portal</a></li>
+            <li class="footer-link-item"><a href="portal.html">Workstation Login</a></li>
+          </ul>
+        </div>
+
+        <!-- Compliance & Hours -->
+        <div>
+          <h4 class="footer-col-title">University Standing</h4>
+          <p style="font-size:13.5px; color:#94a3b8; line-height:1.6; margin-bottom:12px;">
+            Recognized by Government of Karnataka & Higher Education Council. All examination records adhere to Mangalore University semester guidelines.
+          </p>
+          <div style="font-size:12.5px; color:#38bdf8; font-weight:600;">
+            <i class="fa-solid fa-shield-halved"></i> 100% Encrypted Student Data
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 ABC College of Science, Kundapura. All Rights Reserved.
+        </div>
+        <div style="display:flex; gap:20px;">
+          <a href="portal.html" style="color:#94a3b8; font-size:13px;">Admin Workstation</a>
+          <a href="#about" style="color:#94a3b8; font-size:13px;">Academic Regulations</a>
+          <a href="#contact" style="color:#94a3b8; font-size:13px;">Help Desk</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Notification Toast Container -->
+  <div id="landing-toast-container" class="landing-toast-container"></div>
+
+  <!-- Main Landing Page Script -->
+  <script src="landing.js"></script>
+
 </body>
 
 </html>

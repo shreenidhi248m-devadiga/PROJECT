@@ -48,24 +48,23 @@ body.dark-theme {
 
 body {
   font-family: var(--font-main);
-  background: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+  background-color: var(--bg-app);
   color: var(--text-main);
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
   overflow: hidden;
-  padding: 10px;
 }
 
 .app-container {
   display: flex;
-  width: 100%;
-  max-width: 1480px;
-  height: 97vh;
+  width: 100vw;
+  max-width: 100%;
+  height: 100vh;
   background-color: var(--bg-app);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 0;
+  box-shadow: none;
   overflow: hidden;
   position: relative;
 }
@@ -195,6 +194,27 @@ body {
 
 .window-left { display: flex; align-items: center; }
 
+.portal-back-btn {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13px;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  margin-right: 12px;
+}
+
+.portal-back-btn:hover {
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  transform: translateX(-2px);
+}
+
 .window-title {
   font-family: var(--font-heading);
   font-size: 14px;
@@ -247,22 +267,6 @@ body {
   padding: 4px;
   border-radius: 6px;
 }
-
-.window-controls {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-left: 8px;
-}
-
-.win-btn {
-  color: #94a3b8;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.win-btn:hover { color: #ffffff; }
-.win-close:hover { color: #ef4444; }
 
 .views-wrapper {
   flex: 1;
@@ -1233,3 +1237,242 @@ body {
 
 .text-red { color: #ef4444; }
 .font-bold { font-weight: 700; }
+
+/* ==========================================================================
+   HIGH-CONTRAST & VISIBLE DARK MODE STYLES (body.dark-theme)
+   ========================================================================== */
+body.dark-theme {
+  background-color: #080e1a !important;
+  color: #f1f5f9 !important;
+}
+
+/* Login Page Hero in Dark Mode */
+body.dark-theme .login-hero-title {
+  color: #ffffff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .login-hero-sub {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .unified-login-card {
+  background-color: #111b2e !important;
+  border: 1px solid #1e293b !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-theme .role-selector-row {
+  background-color: transparent;
+}
+
+body.dark-theme .role-select-btn {
+  background-color: #182438 !important;
+  border-color: #273854 !important;
+}
+
+body.dark-theme .role-select-btn:hover {
+  background-color: #1f304a !important;
+}
+
+body.dark-theme .role-select-btn .role-btn-icon {
+  color: #38bdf8 !important;
+}
+
+body.dark-theme .role-select-btn .role-btn-title {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .role-select-btn.active {
+  background-color: #1d68ed !important;
+  border-color: #1d68ed !important;
+}
+
+body.dark-theme .role-select-btn.active .role-btn-icon,
+body.dark-theme .role-select-btn.active .role-btn-title {
+  color: #ffffff !important;
+}
+
+body.dark-theme .active-role-indicator-banner {
+  border-bottom-color: #1e293b !important;
+}
+
+body.dark-theme .active-role-indicator-banner h3 {
+  color: #ffffff !important;
+  font-weight: 800;
+}
+
+body.dark-theme .role-avatar-circle {
+  background-color: rgba(56, 189, 248, 0.15) !important;
+  color: #38bdf8 !important;
+}
+
+body.dark-theme .login-group label {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .input-with-icon input,
+body.dark-theme .input-with-icon select,
+body.dark-theme textarea {
+  background-color: #0a1120 !important;
+  color: #ffffff !important;
+  border-color: #273854 !important;
+}
+
+body.dark-theme .input-with-icon input:focus,
+body.dark-theme .input-with-icon select:focus,
+body.dark-theme textarea:focus {
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2) !important;
+}
+
+body.dark-theme .input-with-icon i {
+  color: #64748b !important;
+}
+
+body.dark-theme .auth-switch-line {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .auth-inline-link {
+  color: #38bdf8 !important;
+}
+
+/* Workstation Card Boxes & Headings */
+body.dark-theme .card-box {
+  background-color: #111b2e !important;
+  border-color: #1e293b !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .card-section-header {
+  color: #60a5fa !important;
+}
+
+body.dark-theme .section-sub-desc {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .info-line-item {
+  background-color: #16233a !important;
+  color: #f1f5f9 !important;
+}
+
+body.dark-theme .info-line-label {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .info-line-val {
+  color: #ffffff !important;
+}
+
+body.dark-theme .principal-contact-tag {
+  background-color: rgba(56, 189, 248, 0.15) !important;
+  color: #38bdf8 !important;
+}
+
+/* Tables in Dark Mode */
+body.dark-theme .styled-data-table th {
+  background-color: #16233a !important;
+  color: #cbd5e1 !important;
+  border-bottom: 2px solid #273854 !important;
+}
+
+body.dark-theme .styled-data-table td {
+  border-bottom: 1px solid #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+body.dark-theme .styled-data-table tr:hover td {
+  background-color: #1a2a44 !important;
+}
+
+body.dark-theme .styled-mini-table th {
+  background-color: #16233a !important;
+  color: #cbd5e1 !important;
+  border-color: #273854 !important;
+}
+
+body.dark-theme .styled-mini-table td {
+  border-color: #1e293b !important;
+  color: #e2e8f0 !important;
+}
+
+/* Inputs, Details & Filters */
+body.dark-theme .search-input-styled {
+  background-color: #0a1120 !important;
+  color: #ffffff !important;
+  border-color: #273854 !important;
+}
+
+body.dark-theme .field-label {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .field-value {
+  color: #ffffff !important;
+}
+
+body.dark-theme .sub-table-title {
+  color: #60a5fa !important;
+}
+
+body.dark-theme .btn-dept-select,
+body.dark-theme .btn-year-select,
+body.dark-theme .btn-graph-dept {
+  background-color: #16233a !important;
+  border-color: #273854 !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .btn-dept-select:hover,
+body.dark-theme .btn-year-select:hover,
+body.dark-theme .btn-graph-dept:hover {
+  background-color: #1f304a !important;
+  color: #ffffff !important;
+}
+
+body.dark-theme .btn-dept-select.active,
+body.dark-theme .btn-year-select.active {
+  color: #ffffff !important;
+}
+
+body.dark-theme .page-nav-btn,
+body.dark-theme .page-num-btn {
+  background-color: #16233a !important;
+  border-color: #273854 !important;
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .sub-filter-lbl,
+body.dark-theme .sub-count-txt,
+body.dark-theme .pane-text {
+  color: #94a3b8 !important;
+}
+
+body.dark-theme .student-tabs-row {
+  border-bottom-color: #1e293b !important;
+}
+
+body.dark-theme .stu-tab-btn {
+  color: #94a3b8;
+}
+
+body.dark-theme .stu-tab-btn.active {
+  color: #60a5fa !important;
+  border-bottom-color: #60a5fa !important;
+}
+
+/* Statistics Graph Elements in Dark Mode */
+body.dark-theme .graph-title-screenshot {
+  color: #60a5fa !important;
+}
+
+body.dark-theme .point-near-val-screenshot,
+body.dark-theme .svg-year-text {
+  fill: #e2e8f0 !important;
+}
+
+body.dark-theme .light-bg-grid-line-full {
+  stroke: #1e293b !important;
+}
