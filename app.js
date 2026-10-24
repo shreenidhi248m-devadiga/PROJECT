@@ -392,6 +392,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const btnLoginText = document.getElementById('btn-login-text');
+  const btnLoginSubmit = document.getElementById('btn-login-submit');
+
   function configureRole(role) {
     state.activeRole = role;
     const config = roleCredentials[role];
@@ -403,6 +406,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (loginPortalTitle) loginPortalTitle.textContent = config.title;
     if (loginUserLabel) loginUserLabel.textContent = config.userLabel;
     if (loginUserIcon) loginUserIcon.className = `fa-solid ${config.userIcon}`;
+    if (loginAvatarIcon) loginAvatarIcon.innerHTML = `<i class="fa-solid ${config.userIcon}"></i>`;
+    if (btnLoginText) btnLoginText.textContent = config.btnText;
+    if (btnLoginSubmit) {
+      btnLoginSubmit.className = `btn-login-submit btn-${role}-style`;
+    }
     if (loginUser) loginUser.value = config.userVal;
     if (loginPass) loginPass.value = config.passVal;
 
@@ -930,9 +938,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <td><span class="badge ${badgeClass}">${cmp.status}</span></td>
         <td>
           ${cmp.status === 'Resolved'
-            ? `<button class="btn-action-sm btn-done-action" disabled>Resolved</button>`
-            : `<button class="btn-action-sm btn-resolve-action" data-cmp="${cmp.id}">Resolve</button>`
-          }
+          ? `<button class="btn-action-sm btn-done-action" disabled>Resolved</button>`
+          : `<button class="btn-action-sm btn-resolve-action" data-cmp="${cmp.id}">Resolve</button>`
+        }
         </td>
       `;
       complaintsTableBody.appendChild(tr);
