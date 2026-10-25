@@ -966,15 +966,72 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderComplaintsTable();
 
-  // Theme Toggle
+  // Theme Toggle with localStorage synchronization
   const themeToggle = document.getElementById('theme-toggle');
+  const savedTheme = localStorage.getItem('theme');
+  const initialDark = savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  
+  function setPortalTheme(isDark) {
+    if (isDark) {
+      document.body.classList.add('dark-theme');
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+      document.documentElement.classList.remove('dark-theme');
+    }
+    if (themeToggle) {
+      themeToggle.innerHTML = isDark ? '<i class="fa-solid fa-sun" style="color:#fbbf24;"></i>' : '<i class="fa-solid fa-moon"></i>';
+      themeToggle.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+    }
+  }
+
+  setPortalTheme(initialDark);
+
   if (themeToggle) {
     themeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-theme');
-      const isDark = document.body.classList.contains('dark-theme');
-      themeToggle.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+      const isDark = !document.body.classList.contains('dark-theme');
+      setPortalTheme(isDark);
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      showToast(isDark ? 'Switched to Dark Mode' : 'Switched to Light Mode', 'info');
     });
   }
+
+  // Interactive Campus Banner Lightbox Modal
+  const campusBanner = document.getElementById('portal-campus-banner');
+  const lightboxModal = document.getElementById('image-lightbox-modal');
+  const btnCloseLightbox = document.getElementById('btn-close-lightbox');
+  const lightboxBackdrop = document.getElementById('lightbox-backdrop');
+
+  function openLightbox() {
+    if (lightboxModal) {
+      lightboxModal.classList.remove('hidden-modal');
+    }
+  }
+
+  function closeLightbox() {
+    if (lightboxModal) {
+      lightboxModal.classList.add('hidden-modal');
+    }
+  }
+
+  if (campusBanner) {
+    campusBanner.addEventListener('click', openLightbox);
+    campusBanner.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox();
+      }
+    });
+  }
+
+  if (btnCloseLightbox) btnCloseLightbox.addEventListener('click', closeLightbox);
+  if (lightboxBackdrop) lightboxBackdrop.addEventListener('click', closeLightbox);
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightboxModal && !lightboxModal.classList.contains('hidden-modal')) {
+      closeLightbox();
+    }
+  });
 
   // Default setup with URL query parameter support
   const urlRole = new URLSearchParams(window.location.search).get('role');

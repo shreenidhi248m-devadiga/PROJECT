@@ -12,6 +12,14 @@
     href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark-theme');
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -251,11 +259,6 @@
           <div class="page-container">
 
             <div class="dashboard-hero-card card-box">
-              <div class="banner-image-container hero-banner">
-                <img id="college-banner-img" src="assets/college_banner.jpg" alt="College Campus"
-                  class="campus-banner-img">
-              </div>
-
               <div class="college-profile-header">
                 <h1 id="display-college-name" class="college-name-heading">ABC COLLEGE OF SCIENCE</h1>
                 <p id="display-college-place" class="college-location-sub">
@@ -265,6 +268,39 @@
                 <div class="principal-contact-tag">
                   <i class="fa-solid fa-phone-volume"></i> Principal Contact: <strong id="disp-principal-no">+91 98450
                     12345</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- College Campus Photo in Middle (Interactive Professional Showcase) -->
+            <div class="dashboard-banner-card card-box" id="portal-campus-banner" role="button" tabindex="0" title="Click to view full high-resolution image">
+              <img id="college-banner-img" src="assets/college_banner.jpg" alt="ABC College of Science Campus" class="dashboard-banner-photo">
+              
+              <!-- Professional Cursor Hover Overlay -->
+              <div class="banner-hover-overlay">
+                <div class="banner-overlay-top">
+                  <span class="banner-glass-tag">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <span>Main Academic Campus</span>
+                  </span>
+                  <span class="banner-expand-hint">
+                    <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                    <span>Click for Full View</span>
+                  </span>
+                </div>
+
+                <div class="banner-overlay-bottom">
+                  <div class="banner-title-group">
+                    <h3 class="banner-overlay-title">ABC College of Science — Kundapura</h3>
+                    <p class="banner-overlay-sub">
+                      <i class="fa-solid fa-location-dot"></i> Coastal Karnataka - 576201 • Mangalore University Affiliated
+                    </p>
+                  </div>
+                  <div class="banner-features-pills">
+                    <span class="banner-feat-pill"><i class="fa-solid fa-laptop-code"></i> AI & Computing Labs</span>
+                    <span class="banner-feat-pill"><i class="fa-solid fa-book-open"></i> Digital Library</span>
+                    <span class="banner-feat-pill"><i class="fa-solid fa-award"></i> NAAC Grade A+</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1527,6 +1563,19 @@
 
       </div>
     </main>
+  </div>
+
+  <!-- Full-Screen Image Lightbox Modal -->
+  <div id="image-lightbox-modal" class="image-lightbox-modal hidden-modal">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button class="btn-close-lightbox" id="btn-close-lightbox" title="Close full view"><i class="fa-solid fa-xmark"></i></button>
+      <img src="assets/college_banner.jpg" alt="ABC College of Science Full View" class="lightbox-img">
+      <div class="lightbox-caption">
+        <strong>ABC College of Science — Main Academic Campus</strong>
+        <span>Kundapura, Karnataka - 576201 • Mangalore University Affiliated • Government of Karnataka Approved</span>
+      </div>
+    </div>
   </div>
 
   <script src="app.js"></script>

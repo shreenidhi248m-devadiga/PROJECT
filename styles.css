@@ -822,8 +822,39 @@ body {
 /* ==========================================================================
    DASHBOARD PAGE
    ========================================================================== */
-.hero-banner {
-  height: 280px !important;
+.dashboard-hero-card {
+  padding: 24px 28px !important;
+  background: linear-gradient(135deg, #ffffff 0%, #f0f7ff 100%) !important;
+  border-left: 5px solid #1d68ed !important;
+}
+
+.college-profile-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.college-name-heading {
+  font-family: var(--font-heading);
+  font-size: 23px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.3px;
+  margin: 0;
+}
+
+.college-location-sub {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.college-location-sub i {
+  color: #1d68ed;
 }
 
 .principal-contact-tag {
@@ -831,12 +862,293 @@ body {
   font-weight: 700;
   color: #1d68ed;
   background-color: #eff6ff;
+  border: 1px solid #bfdbfe;
   padding: 6px 14px;
   border-radius: 20px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 6px;
+  width: fit-content;
+}
+
+/* ==========================================================================
+   INTERACTIVE PROFESSIONAL CAMPUS BANNER & LIGHTBOX
+   ========================================================================== */
+.dashboard-banner-card {
+  position: relative;
+  padding: 0 !important;
+  overflow: hidden;
+  height: clamp(300px, 34vw, 400px);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.08);
+  background-color: var(--bg-card);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dashboard-banner-card:hover {
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.18), 0 0 0 2px #1d68ed;
+  transform: translateY(-2px);
+}
+
+.dashboard-banner-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 36%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+}
+
+.dashboard-banner-card:hover .dashboard-banner-photo {
+  transform: scale(1.035);
+  filter: brightness(1.03) contrast(1.02);
+}
+
+/* Professional Cursor Hover Overlay */
+.banner-hover-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 22px 24px;
+  background: linear-gradient(180deg, rgba(7, 21, 39, 0.45) 0%, rgba(7, 21, 39, 0.08) 35%, rgba(7, 21, 39, 0.88) 100%);
+  opacity: 0.9;
+  transition: opacity 0.35s ease, background 0.35s ease;
+  pointer-events: none;
+}
+
+.dashboard-banner-card:hover .banner-hover-overlay {
+  opacity: 1;
+  background: linear-gradient(180deg, rgba(7, 21, 39, 0.6) 0%, rgba(7, 21, 39, 0.12) 35%, rgba(7, 21, 39, 0.94) 100%);
+}
+
+.banner-overlay-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.banner-glass-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(11, 31, 58, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.banner-glass-tag i {
+  color: #38bdf8;
+}
+
+.banner-expand-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard-banner-card:hover .banner-expand-hint {
+  background: #1d68ed;
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(29, 104, 237, 0.5);
+  transform: scale(1.05);
+}
+
+.banner-overlay-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.banner-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.banner-overlay-title {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.banner-overlay-sub {
+  font-size: 13px;
+  color: #cbd5e1;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.banner-overlay-sub i {
+  color: #38bdf8;
+}
+
+.banner-features-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.banner-feat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #f8fafc;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+.banner-feat-pill i {
+  color: #38bdf8;
+}
+
+/* Lightbox Modal */
+.image-lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.image-lightbox-modal.hidden-modal {
+  display: none !important;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(4, 11, 24, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: fadeIn 0.25s ease;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 1060px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0b1424;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+  z-index: 1;
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.lightbox-img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  background: #000000;
+  display: block;
+}
+
+.lightbox-caption {
+  padding: 16px 24px;
+  background: #0b1424;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-caption strong {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.lightbox-caption span {
+  font-size: 13px;
+  color: #94a3b8;
+}
+
+.btn-close-lightbox {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: all 0.2s ease;
+}
+
+.btn-close-lightbox:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  transform: rotate(90deg);
+}
+
+/* Dark mode overrides */
+body.dark-theme .dashboard-banner-card {
+  border-color: #1e293b !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .dashboard-banner-card:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 0 0 2px #38bdf8;
 }
 
 .college-info-line-list {

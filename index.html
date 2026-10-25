@@ -24,6 +24,15 @@
 
   <!-- Main Landing Stylesheet -->
   <link rel="stylesheet" href="landing.css">
+
+  <script>
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark-theme');
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -77,6 +86,9 @@
 
       <!-- Header CTAs -->
       <div class="header-actions">
+        <button class="theme-toggle-btn" id="landing-theme-toggle" aria-label="Toggle Light and Dark Mode" title="Toggle Light/Dark Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
         <a href="portal.html" class="btn-portal-login" id="btn-header-login">
           <i class="fa-solid fa-arrow-right-to-bracket"></i>
           <span>Portal Login</span>
@@ -96,6 +108,14 @@
         <li><a href="#attendance" class="mobile-nav-link">Attendance Insights</a></li>
         <li><a href="#departments" class="mobile-nav-link">Academic Departments</a></li>
         <li><a href="#contact" class="mobile-nav-link">Contact & Admissions</a></li>
+        <li>
+          <div class="mobile-theme-row">
+            <span class="mobile-theme-label"><i class="fa-solid fa-circle-half-stroke"></i> Theme Mode</span>
+            <button class="theme-toggle-btn" id="mobile-theme-toggle" aria-label="Toggle Light and Dark Mode" title="Toggle Light/Dark Theme">
+              <i class="fa-solid fa-moon"></i>
+            </button>
+          </div>
+        </li>
         <li>
           <a href="portal.html" class="btn btn-primary" style="width:100%; margin-top:8px;">
             <i class="fa-solid fa-arrow-right-to-bracket"></i> Access Workstation
@@ -290,91 +310,94 @@
   <!-- =================================================================== -->
   <!-- 2. COLLEGE INFORMATION SECTION -->
   <!-- =================================================================== -->
+  <!-- =================================================================== -->
+  <!-- 2. COLLEGE INFORMATION SECTION -->
+  <!-- =================================================================== -->
   <section class="about-section" id="about">
-    <div class="container about-grid">
+    <div class="container">
       
-      <!-- Text Description Column -->
-      <div class="about-text-col">
+      <!-- Centered Section Header -->
+      <div class="section-header-center">
         <div class="section-tag">
           <i class="fa-solid fa-building-columns"></i>
           <span>Institutional Legacy</span>
         </div>
-        
-        <h2 class="section-title">
-          ABC College of Science — Empowering Minds in Coastal Karnataka
-        </h2>
-
-        <p class="about-lead">
-          Established in Kundapura, ABC College of Science has consistently stood as a pillar of academic rigor, technological advancement, and holistic student development. Affiliated with prestigious <strong>Mangalore University</strong>, our campus blends time-tested pedagogy with state-of-the-art digital infrastructure.
+        <h2 class="section-title">ABC College of Science — Empowering Minds in Coastal Karnataka</h2>
+        <p class="section-desc">
+          Established in Kundapura, ABC College of Science stands as a pillar of academic rigor, technological advancement, and holistic student development affiliated with prestigious Mangalore University.
         </p>
+      </div>
 
-        <!-- Vision & Mission Grid -->
-        <div class="vision-mission-grid">
-          <div class="vm-card">
-            <div class="vm-card-header">
-              <div class="vm-icon">
-                <i class="fa-solid fa-eye"></i>
-              </div>
-              <h3 class="vm-title">Our Vision</h3>
+      <!-- Full-Width Campus Showcase Banner (Fits page without left/right asymmetry) -->
+      <div class="campus-showcase-wrapper">
+        <div class="campus-showcase-frame">
+          <img src="assets/college_banner.jpg" alt="ABC College of Science Main Campus in Kundapura" class="campus-showcase-img" loading="lazy">
+          <div class="campus-showcase-overlay">
+            <div class="showcase-info-left">
+              <span class="showcase-pill"><i class="fa-solid fa-building-columns"></i> Main Academic Campus</span>
+              <h3 class="showcase-name">ABC College of Science — Kundapura</h3>
+              <p class="showcase-location"><i class="fa-solid fa-location-dot"></i> Kundapura, Uttara Kannada, Karnataka - 576201</p>
             </div>
-            <p class="vm-desc">
-              To be a premier center of higher learning, cultivating ethical leaders, innovative thinkers, and industry-ready graduates equipped for global challenges.
-            </p>
-          </div>
-
-          <div class="vm-card">
-            <div class="vm-card-header">
-              <div class="vm-icon">
-                <i class="fa-solid fa-bullseye"></i>
-              </div>
-              <h3 class="vm-title">Our Mission</h3>
+            <div class="showcase-badges-right">
+              <span class="showcase-accreditation"><i class="fa-solid fa-award"></i> Affiliated to Mangalore University</span>
+              <span class="showcase-accreditation"><i class="fa-solid fa-shield-halved"></i> Govt. of Karnataka Approved</span>
             </div>
-            <p class="vm-desc">
-              To provide transformative education through contemporary curricula, transparent digital governance, dedicated mentorship, and strong industry linkages.
-            </p>
-          </div>
-        </div>
-
-        <!-- Campus Facilities Checklist -->
-        <div class="facilities-checklist">
-          <div class="facility-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Modern Computing & AI Labs</span>
-          </div>
-          <div class="facility-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Automated Digital Library</span>
-          </div>
-          <div class="facility-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>High-Speed Campus-Wide WiFi</span>
-          </div>
-          <div class="facility-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Smart Interactive Lecture Theatres</span>
-          </div>
-          <div class="facility-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Active Placement & Career Cell</span>
-          </div>
-          <div class="facility-item">
-            <i class="fa-solid fa-circle-check"></i>
-            <span>Auditorium & Sports Complex</span>
           </div>
         </div>
       </div>
 
-      <!-- Campus Image Column -->
-      <div class="about-media-col">
-        <div class="campus-card-frame">
-          <img src="assets/college_building.jpg" alt="ABC College of Science Campus Building in Kundapura" loading="lazy">
-          <div class="campus-badge-float">
-            <div>
-              <div class="float-badge-title">Kundapura Campus</div>
-              <div class="float-badge-sub">Karnataka - 576201 • Mangalore University</div>
+      <!-- Vision & Mission Grid -->
+      <div class="vision-mission-grid">
+        <div class="vm-card">
+          <div class="vm-card-header">
+            <div class="vm-icon">
+              <i class="fa-solid fa-eye"></i>
             </div>
-            <i class="fa-solid fa-building-columns float-badge-icon"></i>
+            <h3 class="vm-title">Our Vision</h3>
           </div>
+          <p class="vm-desc">
+            To be a premier center of higher learning, cultivating ethical leaders, innovative thinkers, and industry-ready graduates equipped for global challenges.
+          </p>
+        </div>
+
+        <div class="vm-card">
+          <div class="vm-card-header">
+            <div class="vm-icon">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+            <h3 class="vm-title">Our Mission</h3>
+          </div>
+          <p class="vm-desc">
+            To provide transformative education through contemporary curricula, transparent digital governance, dedicated mentorship, and strong industry linkages.
+          </p>
+        </div>
+      </div>
+
+      <!-- Campus Facilities Checklist -->
+      <div class="facilities-checklist">
+        <div class="facility-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Modern Computing & AI Labs</span>
+        </div>
+        <div class="facility-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Automated Digital Library</span>
+        </div>
+        <div class="facility-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>High-Speed Campus WiFi</span>
+        </div>
+        <div class="facility-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Smart Interactive Lecture Theatres</span>
+        </div>
+        <div class="facility-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Active Placement & Career Cell</span>
+        </div>
+        <div class="facility-item">
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Auditorium & Sports Complex</span>
         </div>
       </div>
 

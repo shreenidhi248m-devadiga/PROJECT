@@ -280,6 +280,61 @@ button {
   color: #ffffff;
 }
 
+/* Theme Toggle Button (Light & Dark Mode - Icon Only) */
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  color: #1e293b;
+  border-radius: 50%;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+  outline: none;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.theme-toggle-btn i {
+  font-size: 15px;
+  color: #0284c7;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: #e0f2fe;
+  border-color: #0284c7;
+  color: #0284c7;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.2);
+}
+
+.theme-toggle-btn:hover i {
+  transform: rotate(20deg);
+}
+
+.mobile-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 6px;
+  margin-top: 4px;
+  border-top: 1px solid var(--border-color);
+}
+
+.mobile-theme-label {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .mobile-toggle-btn {
   display: none;
   font-size: 22px;
@@ -779,161 +834,201 @@ button {
    COLLEGE INFORMATION SECTION (ABOUT)
    ========================================================================== */
 .about-section {
-  padding: 100px 0;
+  padding: 88px 0 100px;
   background-color: #ffffff;
 }
 
-.about-grid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  align-items: center;
-  gap: 56px;
+/* Full-Width Campus Showcase Banner (Fits page without left/right asymmetry) */
+.campus-showcase-wrapper {
+  width: 100%;
+  margin-bottom: 40px;
 }
 
-.about-text-col {
+.campus-showcase-frame {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 20px 45px -10px rgba(11, 31, 58, 0.18), 0 0 0 1px rgba(11, 31, 58, 0.08);
+  border: 4px solid #ffffff;
+}
+
+.campus-showcase-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.campus-showcase-frame:hover .campus-showcase-img {
+  transform: scale(1.02);
+}
+
+.campus-showcase-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 36px 32px 24px;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 21, 39, 0.85) 45%, rgba(7, 21, 39, 0.96) 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: #ffffff;
+}
+
+.showcase-info-left {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  gap: 6px;
 }
 
-.about-lead {
-  font-size: 17px;
-  color: var(--text-body);
-  line-height: 1.7;
-  margin-bottom: 24px;
+.showcase-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  width: fit-content;
 }
 
-/* Vision & Mission Cards */
+.showcase-name {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.showcase-location {
+  font-size: 13.5px;
+  color: #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.showcase-location i {
+  color: #38bdf8;
+}
+
+.showcase-badges-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.showcase-accreditation {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.showcase-accreditation i {
+  color: #38bdf8;
+}
+
+/* Vision & Mission Cards (Balanced 2-Column Full Width) */
 .vision-mission-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
-  margin-bottom: 30px;
+  gap: 24px;
+  margin-bottom: 28px;
   width: 100%;
 }
 
 .vm-card {
   background-color: var(--bg-page);
   border: 1px solid var(--border-color);
-  padding: 20px;
-  border-radius: var(--radius-md);
+  padding: 24px 26px;
+  border-radius: var(--radius-lg);
   transition: var(--transition);
 }
 
 .vm-card:hover {
   border-color: var(--accent-sky);
   background-color: #ffffff;
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
 }
 
 .vm-card-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .vm-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: var(--radius-sm);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
   background-color: var(--accent-sky-soft);
   color: var(--accent-sky);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .vm-title {
   font-family: var(--font-heading);
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--primary-navy);
 }
 
 .vm-desc {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
-/* Campus Facilities Checklist */
+/* Campus Facilities Checklist (Balanced 3-Column Full Width) */
 .facilities-checklist {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
   width: 100%;
+  background-color: var(--bg-page);
+  padding: 24px 28px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
 }
 
 .facility-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--primary-navy);
 }
 
 .facility-item i {
-  color: var(--accent-sky);
-  font-size: 14px;
-}
-
-/* About Media Column */
-.about-media-col {
-  position: relative;
-}
-
-.campus-card-frame {
-  position: relative;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-xl);
-  border: 4px solid #ffffff;
-}
-
-.campus-card-frame img {
-  width: 100%;
-  height: 480px;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.campus-card-frame:hover img {
-  transform: scale(1.03);
-}
-
-.campus-badge-float {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  right: 24px;
-  background: rgba(11, 31, 58, 0.92);
-  backdrop-filter: blur(10px);
-  padding: 16px 20px;
-  border-radius: var(--radius-lg);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.float-badge-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.float-badge-sub {
-  font-size: 12px;
-  color: var(--accent-sky-light);
-}
-
-.float-badge-icon {
-  font-size: 24px;
-  color: var(--accent-sky-light);
+  color: var(--success);
+  font-size: 15px;
 }
 
 /* ==========================================================================
@@ -1623,7 +1718,7 @@ textarea.form-control {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .campus-card-frame img {
+  .campus-showcase-frame {
     height: 380px;
   }
 }
@@ -1643,6 +1738,27 @@ textarea.form-control {
 
   .hero-title {
     font-size: 36px;
+  }
+
+  .campus-showcase-frame {
+    height: 280px;
+  }
+
+  .campus-showcase-overlay {
+    padding: 20px 16px 16px;
+  }
+
+  .showcase-name {
+    font-size: 19px;
+  }
+
+  .showcase-badges-right {
+    align-items: flex-start;
+  }
+
+  .facilities-checklist {
+    grid-template-columns: 1fr;
+    padding: 18px 20px;
   }
 
   .features-grid, .dept-cards-grid, .roles-grid {
@@ -1670,3 +1786,704 @@ textarea.form-control {
     padding: 28px;
   }
 }
+
+/* ==========================================================================
+   COMPREHENSIVE DARK THEME SYSTEM (landing.css)
+   Ensures ALL letters, headings, cards, and interactive controls are neat & crystal clear
+   ========================================================================== */
+
+body.dark-theme,
+html.dark-theme body {
+  /* Color Tokens for Dark Mode */
+  --primary-navy: #f8fafc;
+  --primary-navy-dark: #060b13;
+  --navy-light: #38bdf8;
+  --navy-subtle: #60a5fa;
+
+  --accent-sky: #38bdf8;
+  --accent-sky-light: #7dd3fc;
+  --accent-sky-soft: rgba(56, 189, 248, 0.16);
+
+  --bg-page: #0b1120;
+  --bg-white: #131e33;
+  --bg-muted: #1a273e;
+  --bg-navy: #060b13;
+
+  --text-main: #f8fafc;
+  --text-body: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-light: #e2e8f0;
+  --text-white: #ffffff;
+
+  --border-color: #24344d;
+  --border-light: #1a273e;
+  --border-focus: #38bdf8;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 30px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.7);
+
+  background-color: #0b1120;
+  color: #cbd5e1;
+}
+
+/* 1. Top Announcement Bar */
+body.dark-theme .top-bar {
+  background-color: #060b13;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .top-bar-item {
+  color: #94a3b8;
+}
+
+body.dark-theme .top-bar-item i {
+  color: #38bdf8;
+}
+
+body.dark-theme .accreditation-pill {
+  background: rgba(56, 189, 248, 0.12);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+/* 2. Site Header & Nav */
+body.dark-theme .site-header {
+  background-color: rgba(11, 17, 32, 0.94);
+  border-bottom: 1px solid #24344d;
+}
+
+body.dark-theme .site-header.scrolled {
+  background-color: rgba(11, 17, 32, 0.98);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .brand-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .brand-tagline {
+  color: #94a3b8;
+}
+
+body.dark-theme .nav-link {
+  color: #cbd5e1;
+}
+
+body.dark-theme .nav-link:hover,
+body.dark-theme .nav-link.active {
+  color: #38bdf8;
+}
+
+body.dark-theme .btn-portal-login {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+body.dark-theme .btn-portal-login:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.5);
+}
+
+body.dark-theme .mobile-toggle-btn {
+  color: #f8fafc;
+}
+
+body.dark-theme .mobile-nav-drawer {
+  background-color: #111c2e;
+  border-bottom: 1px solid #24344d;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-theme .mobile-nav-link {
+  color: #f8fafc;
+}
+
+body.dark-theme .mobile-nav-link:hover {
+  color: #38bdf8;
+}
+
+body.dark-theme .mobile-theme-row {
+  border-top-color: #24344d;
+}
+
+body.dark-theme .mobile-theme-label {
+  color: #cbd5e1;
+}
+
+/* Theme Toggle Button in Dark Mode */
+body.dark-theme .theme-toggle-btn {
+  background-color: #1a273e;
+  border-color: #2e4363;
+  color: #f8fafc;
+}
+
+body.dark-theme .theme-toggle-btn i {
+  color: #fbbf24;
+}
+
+body.dark-theme .theme-toggle-btn:hover {
+  background-color: #243654;
+  border-color: #38bdf8;
+  color: #38bdf8;
+  box-shadow: 0 0 14px rgba(56, 189, 248, 0.25);
+}
+
+/* 3. Hero Section */
+body.dark-theme .hero-section {
+  background: linear-gradient(180deg, #0f172a 0%, #0b1120 100%);
+}
+
+body.dark-theme .hero-badge {
+  background-color: #16233b;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.1);
+}
+
+body.dark-theme .hero-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .hero-title span {
+  color: #38bdf8;
+}
+
+body.dark-theme .hero-subtitle {
+  color: #cbd5e1;
+}
+
+body.dark-theme .btn-primary {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
+}
+
+body.dark-theme .btn-primary:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 24px rgba(2, 132, 199, 0.5);
+}
+
+body.dark-theme .btn-outline {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #f8fafc;
+  background-color: transparent;
+}
+
+body.dark-theme .btn-outline:hover {
+  border-color: #38bdf8;
+  color: #38bdf8;
+  background-color: rgba(56, 189, 248, 0.12);
+}
+
+body.dark-theme .hero-highlights {
+  border-top-color: #24344d;
+}
+
+body.dark-theme .hero-highlight-item {
+  color: #cbd5e1;
+}
+
+body.dark-theme .hero-highlight-item i {
+  color: #34d399;
+}
+
+/* 4. Dashboard Preview Mockup Card */
+body.dark-theme .dashboard-preview-card {
+  background-color: #131e33;
+  border: 1px solid #24344d;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .dashboard-preview-card:hover {
+  box-shadow: 0 28px 60px -10px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(56, 189, 248, 0.3);
+}
+
+body.dark-theme .card-top-bar {
+  background-color: #0d1728;
+  border-bottom: 1px solid #24344d;
+}
+
+body.dark-theme .card-top-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .card-date-badge {
+  background-color: #16233b;
+  border: 1px solid #24344d;
+  color: #cbd5e1;
+}
+
+body.dark-theme .card-date-badge i {
+  color: #38bdf8;
+}
+
+body.dark-theme .card-body-content {
+  background-color: #131e33;
+}
+
+body.dark-theme .kpi-tile {
+  background-color: #16233b;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .kpi-tile:hover {
+  background-color: #1c2c49;
+  border-color: #38bdf8;
+}
+
+body.dark-theme .kpi-label {
+  color: #94a3b8;
+}
+
+body.dark-theme .kpi-val {
+  color: #f8fafc;
+}
+
+body.dark-theme .kpi-sub {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #6ee7b7;
+}
+
+body.dark-theme .kpi-sub.absent {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+}
+
+body.dark-theme .dept-attendance-box {
+  background-color: #16233b;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .dept-box-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .dept-bar-labels {
+  color: #cbd5e1;
+}
+
+body.dark-theme .dept-bar-labels span:last-child {
+  color: #38bdf8;
+}
+
+body.dark-theme .dept-bar-track {
+  background-color: #0b1120;
+}
+
+/* 5. Stats Counter Strip */
+body.dark-theme .stats-strip {
+  background-color: #070c16;
+  border-top: 1px solid #1e293b;
+  border-bottom: 1px solid #1e293b;
+}
+
+body.dark-theme .stat-item {
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+
+body.dark-theme .stat-num {
+  color: #ffffff;
+}
+
+body.dark-theme .stat-title {
+  color: #94a3b8;
+}
+
+/* 6. About Section */
+body.dark-theme .about-section {
+  background-color: #0b1120;
+}
+
+body.dark-theme .section-tag {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+body.dark-theme .section-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .section-desc {
+  color: #cbd5e1;
+}
+
+body.dark-theme .about-lead {
+  color: #cbd5e1;
+}
+
+body.dark-theme .about-lead strong {
+  color: #f8fafc;
+}
+
+body.dark-theme .vm-card {
+  background-color: #131e33;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .vm-card:hover {
+  background-color: #18253f;
+  border-color: #38bdf8;
+}
+
+body.dark-theme .vm-icon {
+  background-color: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+}
+
+body.dark-theme .vm-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .vm-desc {
+  color: #cbd5e1;
+}
+
+body.dark-theme .campus-showcase-frame {
+  border: 4px solid #1e293b;
+  box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-theme .facilities-checklist {
+  background-color: #131e33;
+  border-color: #24344d;
+}
+
+body.dark-theme .facility-item {
+  color: #e2e8f0;
+}
+
+body.dark-theme .facility-item i {
+  color: #34d399;
+}
+
+/* 7. Key Features Section */
+body.dark-theme .features-section {
+  background-color: #070c16;
+}
+
+body.dark-theme .feature-card {
+  background-color: #131e33;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .feature-card:hover {
+  background-color: #18253f;
+  border-color: #38bdf8;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .feature-icon-wrap {
+  background-color: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+body.dark-theme .feature-card:hover .feature-icon-wrap {
+  background-color: #0284c7;
+  color: #ffffff;
+}
+
+body.dark-theme .feature-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .feature-desc {
+  color: #cbd5e1;
+}
+
+body.dark-theme .feature-bullet-list {
+  border-top-color: #24344d;
+}
+
+body.dark-theme .feature-bullet-item {
+  color: #e2e8f0;
+}
+
+body.dark-theme .feature-bullet-item i {
+  color: #34d399;
+}
+
+/* 8. Attendance Spotlight Section & Simulator */
+body.dark-theme .attendance-spotlight-section {
+  background-color: #0b1120;
+  border-top: 1px solid #24344d;
+  border-bottom: 1px solid #24344d;
+}
+
+body.dark-theme .attendance-spotlight-card {
+  background: linear-gradient(135deg, #0e1c33 0%, #162a4d 100%);
+  border: 1px solid #24344d;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-theme .spotlight-info h3 {
+  color: #ffffff;
+}
+
+body.dark-theme .spotlight-info p {
+  color: #cbd5e1;
+}
+
+body.dark-theme .rule-pill {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+}
+
+body.dark-theme .rule-pill i {
+  color: #38bdf8;
+}
+
+body.dark-theme .attendance-sim-box {
+  background: rgba(11, 17, 32, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+body.dark-theme .sim-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .sim-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .sim-big-pct {
+  color: #ffffff;
+}
+
+body.dark-theme .sim-big-pct span {
+  color: #38bdf8;
+}
+
+body.dark-theme .sim-status-desc {
+  color: #cbd5e1;
+}
+
+body.dark-theme .sim-calc-row {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+body.dark-theme .calc-tile-label {
+  color: #94a3b8;
+}
+
+body.dark-theme .calc-tile-num {
+  color: #ffffff;
+}
+
+/* 9. Departments Section */
+body.dark-theme .departments-section {
+  background-color: #070c16;
+}
+
+body.dark-theme .dept-card {
+  background-color: #131e33;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .dept-card:hover {
+  background-color: #18253f;
+  border-color: #38bdf8;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-theme .dept-code-tag {
+  background-color: rgba(56, 189, 248, 0.16) !important;
+  color: #38bdf8 !important;
+}
+
+body.dark-theme .dept-title {
+  color: #f8fafc;
+}
+
+body.dark-theme .dept-desc {
+  color: #cbd5e1;
+}
+
+body.dark-theme .dept-meta-grid {
+  background-color: #16233b;
+}
+
+body.dark-theme .meta-sub {
+  color: #94a3b8;
+}
+
+body.dark-theme .meta-val {
+  color: #f8fafc;
+}
+
+body.dark-theme .dept-action-link {
+  border-top-color: #24344d;
+  color: #38bdf8;
+}
+
+body.dark-theme .dept-action-link:hover {
+  color: #7dd3fc;
+}
+
+/* 10. Portals Section */
+body.dark-theme .portals-section {
+  background-color: #0b1120;
+  border-top: 1px solid #24344d;
+}
+
+body.dark-theme .role-entry-card {
+  background-color: #131e33;
+  border: 1.5px solid #24344d;
+}
+
+body.dark-theme .role-entry-card:hover {
+  background-color: #18253f;
+  border-color: #38bdf8;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-theme .role-name {
+  color: #f8fafc;
+}
+
+body.dark-theme .role-text {
+  color: #cbd5e1;
+}
+
+body.dark-theme .role-perk-item {
+  color: #e2e8f0;
+}
+
+body.dark-theme .role-perk-item i {
+  color: #34d399;
+}
+
+body.dark-theme .btn-role-access {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
+}
+
+body.dark-theme .btn-role-access:hover {
+  background: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+  color: #ffffff;
+}
+
+/* 11. Contact Section & Inquiry Form */
+body.dark-theme .contact-section {
+  background-color: #070c16;
+  border-top: 1px solid #24344d;
+}
+
+body.dark-theme .contact-card-box {
+  background-color: #131e33;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .contact-icon-box {
+  background-color: rgba(56, 189, 248, 0.16);
+  color: #38bdf8;
+}
+
+body.dark-theme .contact-item-label {
+  color: #94a3b8;
+}
+
+body.dark-theme .contact-item-val {
+  color: #f8fafc;
+}
+
+body.dark-theme .contact-form-box {
+  background-color: #131e33;
+  border: 1px solid #24344d;
+}
+
+body.dark-theme .contact-form-box h3 {
+  color: #f8fafc !important;
+}
+
+body.dark-theme .contact-form-box p {
+  color: #cbd5e1 !important;
+}
+
+body.dark-theme .form-label {
+  color: #f8fafc;
+}
+
+body.dark-theme .form-control {
+  background-color: #16233b;
+  border: 1.5px solid #24344d;
+  color: #ffffff;
+}
+
+body.dark-theme .form-control::placeholder {
+  color: #94a3b8;
+}
+
+body.dark-theme .form-control:focus {
+  border-color: #38bdf8;
+  background-color: #1a2942;
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+  color: #ffffff;
+}
+
+body.dark-theme select.form-control {
+  background-color: #16233b;
+  color: #ffffff;
+}
+
+body.dark-theme select.form-control option {
+  background-color: #131e33;
+  color: #ffffff;
+}
+
+/* 12. Footer */
+body.dark-theme .site-footer {
+  background-color: #04070e;
+  border-top: 1px solid #1e293b;
+}
+
+body.dark-theme .footer-brand-title {
+  color: #ffffff;
+}
+
+body.dark-theme .footer-brand-desc {
+  color: #94a3b8;
+}
+
+body.dark-theme .footer-col-title {
+  color: #ffffff;
+}
+
+body.dark-theme .footer-link-item a {
+  color: #cbd5e1;
+}
+
+body.dark-theme .footer-link-item a:hover {
+  color: #38bdf8;
+}
+
+body.dark-theme .footer-bottom-bar {
+  border-top-color: #1e293b;
+  color: #94a3b8;
+}
+
+body.dark-theme .footer-bottom-bar a {
+  color: #cbd5e1;
+}
+
+body.dark-theme .footer-bottom-bar a:hover {
+  color: #38bdf8;
+}
+
+/* 13. Toast Notifications */
+body.dark-theme .landing-toast {
+  background-color: #131e33;
+  color: #ffffff;
+  border: 1px solid #24344d;
+  border-left: 4px solid #38bdf8;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+

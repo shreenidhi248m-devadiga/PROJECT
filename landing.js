@@ -5,6 +5,51 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // 0. Dark / Light Mode Toggle
+  const landingThemeToggle = document.getElementById('landing-theme-toggle');
+  const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+  function updateThemeUI(isDark) {
+    if (isDark) {
+      document.body.classList.add('dark-theme');
+      document.documentElement.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+      document.documentElement.classList.remove('dark-theme');
+    }
+
+    [landingThemeToggle, mobileThemeToggle].forEach(btn => {
+      if (!btn) return;
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      }
+      btn.setAttribute('title', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+      btn.setAttribute('aria-label', isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode');
+    });
+  }
+
+  // Initial theme state detection from localStorage or system preference
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const initialIsDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+  updateThemeUI(initialIsDark);
+
+  function handleToggleTheme() {
+    const isCurrentlyDark = document.body.classList.contains('dark-theme');
+    const newDark = !isCurrentlyDark;
+    updateThemeUI(newDark);
+    localStorage.setItem('theme', newDark ? 'dark' : 'light');
+    showToast(newDark ? 'Switched to Dark Mode' : 'Switched to Light Mode', 'info');
+  }
+
+  if (landingThemeToggle) {
+    landingThemeToggle.addEventListener('click', handleToggleTheme);
+  }
+  if (mobileThemeToggle) {
+    mobileThemeToggle.addEventListener('click', handleToggleTheme);
+  }
+
   // 1. Sticky Navigation on Scroll
   const siteHeader = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
